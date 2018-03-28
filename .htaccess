@@ -1,0 +1,13 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^fifvirtual.com$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^www.fifvirtual.com$
+RewriteCond %{REQUEST_URI} !public/
+RewriteRule (.*) /public/$1 [L]
+
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Configure el paquete “ea-php56” como el lenguaje de programación predeterminado “PHP”.
+<IfModule mime_module>
+  AddType application/x-httpd-ea-php56 .php .php5 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

@@ -1,0 +1,65 @@
+<style>
+    .main_bg{
+        background: url('<?php echo $this->basePath() ?>/img/layout/mapaferia.jpg') !important;
+        background-repeat: no-repeat !important;
+        background-size: 100% 100% !important;
+    }
+ 		hr{
+        background: rgb(38, 48, 154);
+        width: 100%;
+        height: 4px
+    }
+		.hr1{
+			background: white !important; 
+		}
+		.parallax{
+			width: 100% !important;
+			height: 300px;
+			background: url('<?php echo $this->basePath() ?>/img/layout/feriaparallax.jpg');
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;
+		}
+		</style>
+		<h1 style="font-weight: 900; display: inline;">Encuentra <h1 style="font-weight: 400; display: inline;"> tu franquicia</h1></h1>
+		<hr class="hr1">
+<div class="stands" style="top: 20px; left: 85px;background-image:url('<?php echo $this->basePath('img/area/'.$this->Salon->IMAGEN);?>');background-size: 100% 100%;background-position: 50%;background-repeat: no-repeat;position:relative; width:975.6px;height: 685px">
+<?php foreach ($this->Stands as $Stand){?>
+
+	<div class="stand" style="background: white;border: solid black;position: absolute; width:<?php echo $Stand->ANCHO;?>px;  TOP:<?php echo $Stand->ARRIBA?>; 
+	LEFT:<?php echo $Stand->IZQUIERDA?>;<?php if($Stand->POSICION=='VERTICAL'){?> height: 59px;   
+	transform: rotate(-90deg);-webkit-transform: rotate(-90deg);-moz-transform: rotate(-90deg);-o-transform: rotate(-90deg);<?php }else{?>height: 37px; <?php }?>">
+		
+		<?php if(!isset($Stand->ID_EMPRESA)){?>
+			<img alt="" src="<?php echo $this->basePath('img/Logo_Empresas/disponible.png');?>" class="hover_1" width="100%" height="100%"/>
+		<?php }elseif($Stand->ID_EMPRESA==0){?>
+			<img alt="" src="<?php echo $this->basePath('img/Logo_Empresas/RESERVADO.jpg');?>" class="hover_1" width="100%" height="100%"/>
+		<?php }else{?>
+			<a <?php if(!isset($this->Usuario)||$this->Usuario==''){ ?> href="" data-toggle="modal" data-target="#session"  <?php  } else{?>href="<?php echo $this->url('ficha_empresa',array('ano'=>$this->ANO,'empresa'=>$Stand->ID_EMPRESA));}?>"><img class="hover_1" alt="" src="<?php echo $this->basePath('img/Logo_Empresas/'.$Stand->IMAGEN_ARCHIVO);?>" width="100%" height="100%" /></a>
+		<?php }?>
+
+	</div>
+<?php }?>
+
+</div>
+
+<div id="session" class="modal fade" style="top: 100px;" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div style="border-bottom: 0 !important;" class="modal-header">
+        <button style="padding: 0 10px 0 0 !important;color: rgb(38, 48, 154);" type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div style="padding-top: 0!important;" class="modal-body text-center">
+	  <h3 style="color: rgb(38, 48, 154); font-weight: 900;">Debes iniciar sesi&oacute;n para visitar los stands o realizar citas</h3><hr>
+      <a style="font-size: 28px;font-weight: 900;text-decoration: underline;padding: 5px 10px 7px 10px;background: #3e3e9682;border-radius: 41px;color: #26309a;" href="<?php echo $this->url('session',array('ano'=>$this->ANO))?>">Inicia Sesi&oacute;n</a>
+	  </div>
+
+    </div>
+
+  </div>
+</div>
+</div>
+<div style="position: absolute;top:890px;width: 100%;height: 80px;background: url('<?php echo $this->basePath() ?>/img/layout/trama.png') !important;" class="trama"></div>
+<div class="parallax" style="display: flex; justify-content: center; align-items: center;">
+<a style="color:white;font-size: 25px; font-weight: bold; padding:5px 10px 6px 10px; border: solid white; border-radius: 40px" href="<?php echo $this->basePath('mapa/mapa.pdf');?>" target="_blank">Descargar Mapa</a>
+</div>

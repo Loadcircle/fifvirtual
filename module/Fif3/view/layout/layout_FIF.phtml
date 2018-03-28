@@ -1,0 +1,385 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <?php echo $this->headTitle('FIF '. $this->translate('Virtual'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.png'))
+                        ->prependStylesheet($this->basepath('css/sweetalert.css'))
+                        ->prependStylesheet($this->basePath('js/owl/dist/assets/owl.carousel.min.css')) ?>
+                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath('js/sweetalert.min.js'))
+             ; ?>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+</head>
+
+<body style="color: white;background: url('<?php echo $this->basePath() ?>/img/layout/fondo.jpg');background-size: 100% 100%; ">
+        <style>
+        *{
+            font-family: 'Quicksand', sans-serif;
+        }
+         footer hr {
+             background: rgb(81, 81, 81);
+         }
+            .mx-auto a{
+                color: #2d5dff !important;
+            }
+            nav li a{
+                color: #0A33BD !important;
+                font-size: 20px;
+            }
+            nav li {
+                padding:0 10px 0 10px;
+                z-index: 1000;
+            }
+            .navbar-collapse{
+                z-index: 1000;
+                
+            }
+            nav{
+                background: white;
+                -webkit-box-shadow: 0px 11px 29px 2px rgba(0,0,0,0.76);
+                -moz-box-shadow: 0px 11px 29px 2px rgba(0,0,0,0.76);
+                box-shadow: 0px 11px 29px 2px rgba(0,0,0,0.76);
+            }
+            .menu{
+                padding-top: 0px;
+            }
+            form{
+                margin-left: 10px;
+            }
+            input {
+                display: inline !important;
+            }
+            .menu ul li{
+                list-style: none;
+                margin-left: 10px;
+            }
+            .hover_1{
+                transition: all ease 0.2s;
+            }
+            .hover_1:hover{
+                transform: scale(1.5);
+            }
+            nav{
+                padding: 0 !important; 
+                height: 80px
+            }
+            .fif{
+                position: absolute;
+                z-index: 1000;
+                right: 0;
+            }
+            .fif img{
+                width: 110px
+            }
+            .navbar-toggler{
+                margin-right: 29% !important;
+            }
+            @media (max-width: 991px) {
+          .mr-auto {
+              background: #00b7ff !important; 
+          }}
+          
+           @media (max-width: 575px) {
+          .fif img {
+             width: 90px !important; 
+              
+          }
+      }
+        </style>
+<div class="main_bg" style="background-size: 100% 100%">
+    <div class="menu">
+    <div class="Sesion">
+    <div class="fif"><a style=" height: 100%; padding: 0 10px 0 10px; margin-right: 0;" class="navbar-brand" href="<?php echo $this->basePath()?>">
+            <img style="" src="<?php echo $this->basePath() ?>/img/layout/logofif.png" class="d-inline-block align-top" alt=""></a>
+            </div> 
+        <nav style="" class="navbar navbar-expand-lg navbar-light ">
+            <a style="background: rgb(0, 4, 48); height: 100%; padding: 0 10px 0 10px" class="navbar-brand" href="<?php echo $this->basePath()?>">
+            <img style="" src="<?php echo $this->basePath() ?>/img/layout/logo.png" width="100" height="100%" class="d-inline-block align-top" alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div style="margin: 0 5% 0 5%; height: 70px" class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                <?php if(!isset($this->Usuario)||$this->Usuario==''){?>
+                    <!--Script de la Sesion-->
+                    <script>
+                        $(document).ready(function() {
+                        $('#Session').submit(function() {
+                            frm = $(this);
+                            btn = frm.find("#enviar");
+                            method = frm.attr("method");
+                            btn.attr("disabled", "disabled");
+                            $.ajax({
+                                url: frm.attr('action'),
+                                type: method,
+                                data: frm.serialize(),
+                                data: new FormData(this),
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success: function(data){
+                                    btn.removeAttr("disabled");
+                                    frm.find('.response').html(data).hide().slideDown();
+                                    },
+                                error:function(data, msg){
+                                        btn.removeAttr("disabled");
+                                        frm.find('.response').html(data).hide().slideDown();
+                                        },
+                            });
+                            return false;
+
+                        });
+
+                        });
+
+                    </script>
+                    <!--Script de la Sesion-->  
+                    <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo $this->url('session',array('ano'=>$this->ANO))?>">Inicia sesi&oacute;n <span class="sr-only">(current)</span></a>
+                    </li>      
+                  <?php }else{ ?>
+                  <!--Script cierre de sesion-->
+                  <script>
+                            $(document).ready(function() {
+                                $('a.cerrarsession').click( function( e ){
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    frm = $('.Sesion');
+                                    $.ajax({
+                                        url:  '<?php echo $this->url('cerrarsession',array('ano'=>$this->ANO))?>',
+                                        type: 'post',
+                                        data: null,
+                                        data: null,
+                                        contentType: false,
+                                        cache: false,
+                                        processData: false,
+                                        success: function(data){
+                                            frm.find('.response').html(data).hide().slideDown();
+                                        },
+                                        error:function(data, msg){
+                                            frm.find('.response').html(data).hide().slideDown();
+                                        },
+                                    });
+
+                                });
+
+                            });
+
+                        </script>
+                        <!--Script cierre de sesion-->
+                        
+                            <div class="response"></div>
+                            <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="background: #8d99f3;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i style="margin-right: 9px;" class="fas fa-user fa-lg"> </i> 
+                            <?php echo $this->Usuario->NOMBRE.' '.$this->Usuario->APELLIDOS ?>
+                            </a>
+                            <div style="background-color: rgba(0, 0, 0, 0); border: solid 0px" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            
+                            <?php if($Usuario->MODIFICAR_INFO=='ACTIVO'){?><a class="dropdown-item" style="background: #00b7ff;" href="<?php echo $this->url('actualizardatos',array('ano'=>$this->ANO))?>">Actualizar Datos</a><?php }?>
+                            <a class="dropdown-item" style="background: #00b7ff; margin-bottom:5px;" href="<?php echo $this->url('cambioclave',array('ano'=>$this->ANO))?>">Cambio de clave</a>
+                            <a class="dropdown-item cerrarsession" style="background: #00b7ff;" href="#">Cerrar sesi&oacute;n</a>
+                            </li>                           
+                    <?php }?>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo $this->url('stands',array('ano'=>$this->ANO,'area'=>1))?>">Visita la feria <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo $this->url('lista_empresas',array('ano'=>$this->ANO))?>">Marcas participantes<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo $this->url('contacto',array('ano'=>$this->ANO))?>">Cont&aacute;ctanos <span class="sr-only">(current)</span></a>
+                </li>
+                <?php if(!isset($this->Usuario)||$this->Usuario==''){?><?php }else{ ?>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo $this->url('listacitas',array('ano'=>$this->ANO))?>">Mis citas<span class="sr-only">(current)</span></a>
+                </li>
+                <?php }?>
+                </ul>
+            </div>
+           
+        </nav>
+        
+                </div>
+            </div>
+
+        <div class="container" style="padding-bottom: 50px; padding-top: 30px;">
+            <?php echo $this->content; ?>
+        </div>
+</div>
+            <!--Footer-->
+            <footer class="page-footer font-small stylish-color-dark pt-4" style="margin-top: 0px;  0 0 0 !important; background: rgb(63, 58, 58); color: white; -webkit-box-shadow: 0px 0px 32px -1px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 32px -1px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 32px -1px rgba(0,0,0,0.75);">
+        
+                <!--Footer Links-->
+                <div class="container text-center text-md-left">
+                    <div class="row">
+            
+                        <!--First column-->
+                        <div class="col-md-4">
+                            <h5 class=" mb-4 mt-3 font-weight-bold">Auspiciadores</h5>
+                            <div class="row">
+                             <?php foreach($this->Auspiciadores as $Auspiciador){?>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                <img alt="" width="150px;" src="<?php echo $this->basePath('img/auspiciadores-fif/'.$Auspiciador->IMAGEN) ?>">
+                                </div>
+                            
+                            <?php }?>
+                            </div>
+
+                        </div>
+                        <!--/.First column-->
+            
+                        <hr class="clearfix w-100 d-md-none">
+            
+                        <hr class="clearfix w-100 d-md-none">
+            
+                        <!--Third column-->
+                        <div class="col-md-2 mx-auto">
+                            <h5 class=" mb-4 mt-3 font-weight-bold">Sigue navegando</h5>
+                            <ul class="list-unstyled">
+                            <li><a href="<?php echo $this->url('fif',array('ano'=>$this->ANO))?>">Home</a></li>
+                            <li><a href="<?php echo $this->url('stands',array('ano'=>$this->ANO,'area'=>1))?>">Stands</a></li>
+                            <li><a href="<?php echo $this->url('lista_empresas',array('ano'=>$this->ANO))?>">Lista de Empresas</a></li>
+                            <li><a href="<?php echo $this->url('contacto',array('ano'=>$this->ANO))?>">Cont&aacute;ctanos</a></li>
+                            </ul>
+                        </div>
+                        <!--/.Third column-->
+            
+                        <hr class="clearfix w-100 d-md-none">
+            
+                        <!--Fourth column-->
+                        <div class="col-md-2 mx-auto">
+                            <h5 class="mb-4 mt-3 font-weight-bold ">Te puede interesar</h5>
+                            <ul class="list-unstyled">
+                            <li><a href="http://clubfranquicia.com" target="_blank">Clubfranquicia.com</a></li>
+                            <li><a href="https://www.franquiciatv.com" target="_blank">Franquiciatv.com</a></li>
+                            </ul>
+                        </div>
+                        <!--/.Fourth column-->
+                    </div>
+                </div>
+                <!--/.Footer Links-->
+
+                <!--Copyright-->
+                <div class="footer-copyright py-3 text-center">
+                    <div class="container-fluid">
+                        © 2018 Copyright: <a style="color: #2d5dff" href="http://fifvirtual.com"> fifvirtual.com </a>
+            
+                    </div>
+                </div>
+                <!--/.Copyright-->
+    
+            </footer>
+            <!--/.Footer--> 
+<script>
+    $(document).ready(function(){
+                $(".owl-1").owlCarousel({
+                  loop:true,
+                  margin:10,
+                  autoplay:true,
+                  autoplayTimeout:3000,
+                  responsive:{
+                      0:{
+                          items:1
+                      },
+                      600:{
+                          items:2
+                      },
+                      1000:{
+                          items:2
+                      }
+                  }
+              });
+              $(".owl-2").owlCarousel({
+                  loop:true,
+                  margin:10,
+                  lazyLoad:true,
+                  autoplay:true,
+                  autoplayTimeout:2500,
+                  rtl:true,
+                  responsive:{
+                      0:{
+                          items:2
+                      },
+                      600:{
+                          items:3
+                      },
+                      1000:{
+                          items:4
+                      }
+                  }
+              });
+              $(".owl-4").owlCarousel({
+                  loop:true,
+                  margin:10,
+                  lazyLoad:true,
+                  autoplay:true,
+                  autoplayTimeout:2500,
+                  rtl:true,
+                  responsive:{
+                      0:{
+                          items:1
+                      },
+                      600:{
+                          items:1
+                      },
+                      1000:{
+                          items:1
+                      }
+                  }
+              });
+              $(".owl-3").owlCarousel({                  
+                  loop:true,
+                  margin:10,
+                  lazyLoad:true,
+                  autoplay:true,
+                  autoplayTimeout:2500,
+                  responsive:{
+                      0:{
+                          items:2
+                      },
+                      600:{
+                          items:3
+                      },
+                      1000:{
+                          items:4
+                      }
+                  }
+              }); });
+              $(function(){
+                $(".accordion-titulo").click(function(e){
+                        
+                        e.preventDefault();
+                    
+                        var contenido=$(this).next(".accordion-content");
+
+                        if(contenido.css("display")=="none"){ //open        
+                        contenido.slideDown(250);         
+                        $(this).addClass("open");
+                        }
+                        else{ //close       
+                        contenido.slideUp(250);
+                        $(this).removeClass("open");  
+                        }
+                    });
+                });
+</script>       
+<script src="<?php echo $this->basepath()?>/js/owl/dist/owl.carousel.min.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>   
+    </body>
+</html>

@@ -1,0 +1,447 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
+    
+        <?php echo $this->headTitle('FIF '. $this->translate('Virtual'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.png'))
+                        ->prependStylesheet($this->basepath('css/sweetalert.css'))
+                        ->prependStylesheet($this->basePath('js/owl/dist/assets/owl.carousel.min.css')) ?>
+                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath('js/sweetalert.min.js'))
+             ; ?>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+    <body>
+    <style>
+                footer a{
+                    color: #ff0081;
+                }
+                body{
+                    padding: 0 !important;
+                }
+                #demo{
+                text-align: center;
+                font-size: 60px;
+                margin-top:0px;
+                text-shadow: 2px 2px #000;
+                
+                }
+                a:link{
+                text-decoration: none;
+                }
+                /*Main header*/
+                header {
+                width: 100%; /* Establecemos que el header abarque el 100% del documento */
+                overflow:hidden; /* Eliminamos errores de float */
+                margin-bottom: 20px;
+                z-index: 1000;
+                }
+                .wrapper_1 {
+                width:90%; /* Establecemos que el ancho sera del 90% */
+                margin:auto; /* Centramos los elementos */
+                overflow:hidden; /* Eliminamos errores de float */
+                }
+                header .logo {
+                line-height:200px;
+                float:left;
+                }
+                
+                header nav {
+                float:right;
+                line-height:200px;
+                }
+                header nav a {
+                display:inline-block;
+                color:#fff;
+                text-decoration:none;
+                padding:10px 20px;
+                line-height:normal;
+                font-size:18px;
+                font-weight:bold;
+                -webkit-transition:all 1s ease;
+                -o-transition:all 1s ease;
+                transition: all 1s ease;
+                }
+                header, header nav, header nav .logo{
+                -webkit-transition:all 0.3s;
+                -moz-transition:all 0.3s;
+                -ms-transition:all 0.3s;
+                -o-transition:all 0.3s;
+                transition:all 0.3s;
+                }
+                /*Main Header*/
+
+                /*Header 2*/
+                .header2 {
+                position: fixed !important;
+                height:100px;
+                background: rgba(0, 0, 0, 0.6);
+                }
+                
+                .header2 .logo {
+                line-height:100px;
+                font-size:30px;
+                }
+                
+                .header2 nav {
+                line-height:100px;
+                }
+                header nav a:hover {
+                background: #ef0d63;
+                border-radius:50px;
+                color: white;
+                }
+                /*Header 2*/
+                .h3-res{
+                    font-size: 4vw;
+                }
+                .h-res{
+                    font-size: 3vw !important;
+                }
+                /*Media query*/
+                @media screen and (max-width: 1060px) {
+                header .logo,
+                header nav {
+                    width:100%;
+                    text-align:center; /*Centramos el menu y el logotipo*/
+                    line-height:100px;
+                }
+                
+                .header2 {
+                    height:auto;
+                }
+                
+                .header2 .logo,
+                .header2 nav {
+                    line-height:50px;
+                }
+                .header2 nav a{
+                    background: rgba(0, 0, 0, 0);
+                }
+                }
+                @media screen and (max-width: 760px) {
+                header nav a{
+                    font-size: 15px;  
+                }
+                header .logo img{
+                    width: 15%;
+                }
+                .margin-0{
+                    margin: 0 5px 0 5px !important;
+                }
+                .slider{
+                    width: auto !important;
+                }
+                .contacto-res{
+                    text-align: center !important;
+                }
+                }
+                @media screen and (max-width: 500px) {
+                header nav a{
+                    font-size: 10px;  
+                }
+                .header2 .logo, .header2 nav{
+                    line-height: 5px;
+                }
+                header nav{
+                    line-height: 5px;
+                }
+                header{
+                    background: rgba(0, 0, 0, 0.8);
+                }
+               
+                .margin-0{
+                    margin: 0 5px 0 5px !important;
+                }
+                .slider{
+                    width: auto !important;
+                }
+                }
+
+                /*Media query*/
+                nav span{
+                border-left: 3px solid white;
+                margin-right: 25px;
+
+                }
+                .boton{
+                position: absolute; 
+                text-align: center; 
+                width: 100%; 
+                margin-top: 85vh;
+                }
+                .boton a{
+                color: #fff;
+                border-radius: 30px;
+                border: solid 2px white;
+                font-size: 25px;
+                padding: 6px 60px 10px 60px;
+                font-weight: bold   ;
+                }
+                .hover_1{
+                transition: all 0.4s ease-in;
+                }
+                .hover_1:hover{
+                transform: scale(1.1);
+                }
+    </style>
+            <!-- header nav -->
+        <header style="position: absolute;" id="inicio">
+            <div class="wrapper_1">
+                <div class="logo"><a href=""><img width="100px" src="<?php echo $this->basePath('img/layout/');?>logo.png" alt=""></a></div>
+                
+                <nav>
+                <a href="#eventos">Pr&oacute;ximos eventos</a>
+                <a href="#como"><span></span>C&oacute;mo funciona</a>
+                <a href="#marcas"><span></span>Marcas</a>
+                <a href="#participa"><span></span>Participa como</a>
+                <a href="#contacto"><span></span>Cont&aacute;ctanos</a>
+                </nav>
+            </div>
+        </header>
+            <!-- header nav -->
+                <?php echo $this->content; ?>
+            <!--Footer-->
+            <footer class="page-footer font-small stylish-color-dark pt-4" style="background: rgb(63, 58, 58); color: white;">
+        
+                <!--Footer Links-->
+                <div class="container text-center text-md-left">
+                    <div class="row">
+            
+                        <!--First column-->
+                        <div class="col-md-4">
+                            <h5 class="mb-4 mt-3 font-weight-bold">Fif Virtual</h5>
+                            <p><?php echo $this->T->texto;?></p>
+                        </div>
+                        <!--/.First column-->
+            
+                        <hr class="clearfix w-100 d-md-none">
+            
+                        <hr class="clearfix w-100 d-md-none">
+            
+                        <!--Third column-->
+                        <div class="col-md-2 mx-auto">
+                            <h5 class="mb-4 mt-3 font-weight-bold">Sigue navegando</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#eventos">Proximos eventos</a></li>
+                                <li><a href="#como">C&oacute;mo funciona</a></li>
+                                <li><a href="#marcas">Marcas</a></li>
+                                <li><a href="#participa">Participa como</a></li>
+                                <li><a href="#contacto">Contactenos</a></li>
+                            </ul>
+                        </div>
+                        <!--/.Third column-->
+            
+                        <hr class="clearfix w-100 d-md-none">
+            
+                        <!--Fourth column-->
+                        <div class="col-md-2 mx-auto">
+                            <h5 class="mb-4 mt-3 font-weight-bold ">Te puede interesar</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="http://clubfranquicia.com" target="_blank">Clubfranquicia.com</a></li>
+                                <li><a href="https://www.franquiciatv.com" target="_blank">Franquiciatv.com</a></li>
+                            </ul>
+                        </div>
+                        <!--/.Fourth column-->
+                    </div>
+                </div>
+                <!--/.Footer Links-->
+            
+                <hr>
+            
+                <!--Call to action-->
+                <div class="text-center py-3">
+                    <ul class="list-unstyled list-inline mb-0">
+                        <li class="list-inline-item"><a href="http://fifvirtual.com/Cliente/" class="btn btn-danger btn-rounded">Empresa</a></li>
+                        <li class="list-inline-item">
+                            <h5 class="mb-1">Empieza Ahora</h5>
+                        </li>
+                        <li class="list-inline-item"><a href="<?php echo $this->url('fif',array('ano'=>'2018'));?>" class="btn btn-danger btn-rounded">Inversionista</a></li>
+                    </ul>
+                </div>
+                <!--/.Call to action-->
+            
+                <hr>
+            
+                <!--Copyright-->
+                <div class="footer-copyright py-3 text-center">
+                    <div class="container-fluid">
+                        © 2018 Copyright: <a href="http://fifvirtual.com"> fifvirtual.com </a>
+            
+                    </div>
+                </div>
+                <!--/.Copyright-->
+    
+            </footer>
+            <!--/.Footer--> 
+            <?php echo $this->inlineScript() ?>
+
+<!-- Scripts -->
+<script>
+                  // Set the date we're counting down to
+                  var countDownDate = new Date("May 30, 2018 08:00:00").getTime();
+
+                  // Update the count down every 1 second
+                  var x = setInterval(function() {
+
+                      // Get todays date and time
+                      var now = new Date().getTime();
+                      
+                      // Find the distance between now an the count down date
+                      var distance = countDownDate - now;
+                      
+                      // Time calculations for days, hours, minutes and seconds
+                      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                      
+                      // Output the result in an element with id="demo"
+                      document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+                      + minutes + "m " + seconds + "s ";
+                      
+                      // If the count down is over, write some text 
+                      if (distance < 0) {
+                          clearInterval(x);
+                          document.getElementById("demo").innerHTML = "El evento ya ha ocurrido";
+                      }
+                  }, 1000);
+
+                $(document).ready(function(){
+                  $("a").on('click', function(event) {
+                    if (this.hash !== "") {
+                      event.preventDefault();
+                      var hash = this.hash;
+                      $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                      }, 800, function(){
+                        window.location.hash = hash;
+                      });
+                    } 
+                  });
+                });
+                
+                $(document).ready(function(){
+                
+                  $(window).scroll(function(){
+                    if( $(this).scrollTop() > 0 ){
+                      $('header').addClass('header2');
+                    } else {
+                      $('header').removeClass('header2');
+                    }
+                  });
+                
+                });
+                function abremodal(){ $("body").append('<div id="modal"><video width="100%" height="100%" autoplay><source src="../movie.mp4" type="video/mp4"><source src="movie.ogg" type="video/ogg">Your browser does not support the video tag.</video><div id="close"> X </div></div>')
+      
+                $( "#close" ).click(function() {
+                $("#modal").remove() ;
+                });
+                }    
+          
+                $(document).ready(function(){
+                $(".owl-1").owlCarousel({
+                  loop:true,
+                  margin:10,
+                  autoplay:true,
+                  autoplayTimeout:3000,
+                  responsive:{
+                      0:{
+                          items:1
+                      },
+                      600:{
+                          items:1
+                      },
+                      1000:{
+                          items:1
+                      }
+                  }
+              });
+              $(".owl-2").owlCarousel({
+                  loop:true,
+                  margin:10,
+                  lazyLoad:true,
+                  autoplay:true,
+                  autoplayTimeout:2500,
+                  rtl:true,
+                  responsive:{
+                      0:{
+                          items:2
+                      },
+                      600:{
+                          items:3
+                      },
+                      1000:{
+                          items:4
+                      }
+                  }
+              });
+              $(".owl-3").owlCarousel({                  
+                  loop:true,
+                  margin:10,
+                  lazyLoad:true,
+                  autoplay:true,
+                  autoplayTimeout:2500,
+                  responsive:{
+                      0:{
+                          items:2
+                      },
+                      600:{
+                          items:3
+                      },
+                      1000:{
+                          items:4
+                      }
+                  }
+              });
+                });       
+                $(document).ready(function() {
+
+                $('#DatosEnviar3').submit(function() {
+                    frm = $(this);
+                    btn = frm.find("#enviar");
+                    method = frm.attr("method");
+                    btn.attr("disabled", "disabled");
+                    $.ajax({
+                        url: frm.attr('action'),
+                        type: method,
+                        data: frm.serialize(),
+                        data: new FormData(this),
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function(data){
+                            btn.removeAttr("disabled");
+                            frm.find('.response').html(data).hide().slideDown();
+                            },
+                        error:function(data, msg){
+                                btn.removeAttr("disabled");
+                                frm.find('.response').html(data).hide().slideDown();
+                                },
+                    });
+                    return false;
+
+                });
+
+                });     
+                            
+                
+</script>
+<!-- Scripts -->
+
+<script src="<?php $this->basePath() ?>./js/owl/dist/owl.carousel.min.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>   
+     
+</body>
+</html>

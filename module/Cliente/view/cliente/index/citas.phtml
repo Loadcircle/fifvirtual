@@ -1,0 +1,395 @@
+<script>
+  $(document).ready(function() {
+
+  $('.EnviarCita').submit(function() {
+    frm = $(this);
+      btn = frm.find(".enviar");
+      method = frm.attr("method");
+      btn.attr("disabled", "disabled");
+      $.ajax({
+          url: frm.attr('action'),
+          type: method,
+          data: frm.serialize(),
+          data: new FormData(this),
+          contentType: false,
+          cache: false,
+          processData: false,
+          success: function(data){
+          frm.find('.response').html(data).hide().slideDown();
+          },
+        error:function(data, msg){
+        console.log('dio error',data,msg);
+            btn.removeAttr("disabled");
+            frm.find('.response2').html(data).hide().slideDown();
+            },
+      });
+      return false;
+
+  });
+
+  });
+  $(document).ready(function() {
+
+  $('.CancelarCita').submit(function() {
+    frm = $(this);
+      btn = frm.find(".enviar");
+      method = frm.attr("method");
+      btn.attr("disabled", "disabled");
+      $.ajax({
+          url: frm.attr('action'),
+          type: method,
+          data: frm.serialize(),
+          data: new FormData(this),
+          contentType: false,
+          cache: false,
+          processData: false,
+          success: function(data){
+          frm.find('.response').html(data).hide().slideDown();
+          console.log('llegaste aca');
+          },
+        error:function(data, msg){
+        console.log('dio error',data,msg);
+            btn.removeAttr("disabled");
+            frm.find('.response2').html(data).hide().slideDown();
+            },
+      });
+      return false;
+
+  });
+
+  });
+  $(document).ready(function() { 
+  $('.ConfirmarCita').submit(function() {
+    frm = $(this);
+      btn = frm.find(".enviar");
+      method = frm.attr("method");
+      btn.attr("disabled", "disabled");
+      $.ajax({
+          url: frm.attr('action'),
+          type: method,
+          data: frm.serialize(),
+          data: new FormData(this),
+          contentType: false,
+          cache: false,
+          processData: false,
+          success: function(data){
+          frm.find('.response').html(data).hide().slideDown();
+          console.log('llegaste aca');
+          },
+        error:function(data, msg){
+        console.log('dio error',data,msg);
+            btn.removeAttr("disabled");
+            frm.find('.response2').html(data).hide().slideDown();
+            },
+      });
+      return false;
+
+  });
+
+  });
+  $(function(){
+                $(".accordion-titulo").click(function(e){
+                        
+                        e.preventDefault();
+                    
+                        var contenido=$(this).next(".accordion-content");
+
+                        if(contenido.css("display")=="none"){ //open        
+                        contenido.slideDown(250);         
+                        $(this).addClass("open");
+                        }
+                        else{ //close       
+                        contenido.slideUp(250);
+                        $(this).removeClass("open");  
+                        }
+                    });
+                });
+</script>
+
+
+
+<style>
+ #container-main{
+          margin:40px auto;
+          width:95%;
+          min-width:320px;
+          max-width:960px;
+      }
+
+      #container-main h1{
+          font-size: 40px;
+          text-shadow:4px 4px 5px #16a085;
+      }
+
+      .accordion-container {
+          width: 100%;
+          margin: 0 0 20px;
+          clear:both;
+      }
+
+      .accordion-titulo {
+          position: relative;
+          display: block;
+          padding: 10px;
+          font-size: 20px;
+          font-weight: 300;
+          background: #4e4e4e;
+          color: #fff;
+          text-decoration: none;
+          border-radius: 40px;
+      }
+      .accordion-titulo.open {
+          background: #332f2f;
+          color: #fff;
+      }
+      .accordion-titulo:hover {
+          background: #332f2f;
+      }
+
+      .accordion-titulo span.toggle-icon:before {
+          content:"+";
+      }
+
+      .accordion-titulo.open span.toggle-icon:before {
+          content:"-";
+      }
+
+      .accordion-titulo span.toggle-icon {
+          position: absolute;
+          top: -7px;
+          right: 20px;
+          font-size: 38px;
+          font-weight:bold;
+      }
+
+      .accordion-content {
+          display: none;
+          padding: 20px;
+          overflow: auto;
+      }
+
+      .accordion-content p{
+          margin:0;
+      }
+
+      .accordion-content img {
+          display: block;
+          float: left;
+          margin: 0 15px 10px 0;
+          width: 50%;
+          height: auto;
+      }
+
+
+
+
+
+
+
+
+  .inversion{
+      width: 100%;
+      margin-top: 35px;
+  }
+  .row{
+    margin-top: 20px;
+  }
+  .boton{
+    color: white!important;
+    background: rgb(63, 63, 63);
+    padding: 7px 14px 7px 14px;
+    border-radius: 30px;
+    font-size: 20px;
+  }
+  .mt-b{
+    margin-top: 23px;
+  }
+  .table{
+    margin-top: 25px;
+    margin-bottom: 70px;
+  }
+  .tread{
+    background: rgb(97, 97, 97);
+  }
+  .tread th{
+    color: white;
+  }
+  .modal-content{
+    background: url('<?php echo $this->basePath()?>/img/cliente/trama-1.png'), white;
+    background-size: cover;
+  }
+  .modal-hr{
+    width: 20%;
+    height: 2px; 
+    background: rgb(63, 63, 63);
+  }
+  select{
+    border: none!important;
+    border-bottom: solid!important;
+    background: transparent!important;
+  }
+
+</style>
+<div class="container">
+  <img class="inversion" src="<?php echo $this->basePath() ?>/img/cliente/agendas.jpg" alt="">
+
+  <div class="row">
+    <div class="col-md-7">
+      <h3>Confirma las citas con los inversionistas interesados en tu franquicia</h3>
+    </div>
+    <div class="col-md-5 mt-b text-right">
+    <a class="boton" href="#" data-toggle="modal" data-target="#citaModal">Generar cita</a>
+    </div>
+  </div>
+
+  <table class="table ">
+  <thead>
+    <tr class="tread text-center">
+      <th scope="col">Cita N&#176;</th>
+      <th scope="col">Inversionista</th>
+      <th scope="col">Email</th>
+      <th scope="col">Celular</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Hora</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Acci&oacute;n</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+  <?php  $meses = array(00=>"Error",'01'=>"Enero",'02'=>"Febrero",'03'=>"Marzo",'04'=>"Abril",'05'=>"Mayo",'06'=>"Junio",'07'=>"Julio",'08'=>'Agosto','09'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre'); 
+foreach($cita as $c){
+    ?>
+      <tr class="text-center">
+      <th scope="row"><?php echo $c->CODIGO; ?></th>
+      <td><?php echo $c->NOMBRE.' '.$c->APELLIDOS; ?></td>
+      <td><?php echo $c->EMAIL; ?></td>
+      <td><?php echo $c->CELULAR; ?></td>
+      <td><?php echo $c->DIA.' de '.$meses[$c->MES].' de '.$c->ANO_E; ?></td>
+      <td><?php echo $c->N_HORARIO; ?></td>
+      <td>
+          <?php if($c->AGENDA_CITA == 'SI'){ ?>
+
+          <p>La cita confirmada y programada</p>    
+          </td>
+          <td>
+          <a href="#" data-toggle="modal" data-target="#cancelar<?php echo $c->CODIGO; ?>">cancelar cita</a>
+          </td>
+          <?php }elseif($c->AGENDA_CITA == 'NO'){ ?>    
+            <p>Solicitud de cita, aun no ha sido confirmada</p> 
+            </td>
+            <td>
+            <a href="#" data-toggle="modal" data-target="#confirmar<?php echo $c->CODIGO; ?>">confirmar cita</a><br>
+            <a href="#" data-toggle="modal" data-target="#cancelar<?php echo $c->CODIGO; ?>">cancelar cita</a>
+            </td>
+          <?php }?>
+      
+    </tr> 
+    <?php } ?>
+  </tbody>
+</table>
+</div>
+
+  <?php  
+  foreach($cita as $c){
+    ?>
+<!-- modal cancelar -->
+<div id="cancelar<?php echo $c->CODIGO; ?>" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div style="top: 70px;border: 0 !important; border-radius: 0 !important;-webkit-box-shadow: 0px 0px 56px -2px rgba(0,0,0,0.72);-moz-box-shadow: 0px 0px 56px -2px rgba(0,0,0,0.72);box-shadow: 0px 0px 56px -2px rgba(0,0,0,0.72);background: #e8e8e8;" class="modal-content">
+        <div class="modal-body">
+        <div class="text-center">
+            <H1 style="color: #01014e !important; font-weight: 900;">¿Desea rechazar la cita?</H1>
+            <form name="CancelarCita" class="CancelarCita" action="<?php echo $this->url('CancelarCitaC') ?>" method="post">
+            <div class="response">
+            <div class="response2"></div>
+            <input type="hidden" name="CODIGO" value="<?php echo $c->CODIGO; ?>">
+            <a style="width: 120px;padding: 5px 10px 5px 10px; border: solid #00a4e5 2px; border-radius: 30px" class="btn btn-default" data-dismiss="modal">No, volver</a>
+            <button type="submit" class="enviar btn btn-default" style="width: 120px;padding: 5px 10px 5px 10px; border: solid #d02d2d 2px; border-radius: 30px" >SI, cancelar</button>
+            </div>
+            </form>                        
+        </div>
+        </div>
+        </div>
+    </div>
+</div>
+  <!-- modal cancelar -->
+
+<!-- modal confirmar -->
+<div id="confirmar<?php echo $c->CODIGO; ?>" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div style="top: 70px;border: 0 !important; border-radius: 0 !important;-webkit-box-shadow: 0px 0px 56px -2px rgba(0,0,0,0.72);-moz-box-shadow: 0px 0px 56px -2px rgba(0,0,0,0.72);box-shadow: 0px 0px 56px -2px rgba(0,0,0,0.72);background: #e8e8e8;" class="modal-content">
+        <div class="modal-body">
+        <div class="text-center">
+            <H1 style="color: #01014e !important; font-weight: 900;">¿Confirmar esta cita?</H1>
+            <form name="ConfirmarCita" class="ConfirmarCita" action="<?php echo $this->url('ConfirmarCitaC',array('ano'=>$this->ANO)) ?>" method="post">
+            <div class="response">
+            <div class="response2"></div>
+            <input type="hidden" name="CODIGO" value="<?php echo $c->CODIGO; ?>">
+            <a style="width: 120px;padding: 5px 10px 5px 10px; border: solid #00a4e5 2px; border-radius: 30px" class="btn btn-default" data-dismiss="modal">No, volver</a>
+            <button type="submit" class="enviar btn btn-default" style="width: 120px;padding: 5px 10px 5px 10px; border: solid #d02d2d 2px; border-radius: 30px" >Si, confirmar</button>
+            </div>
+            </form>                        
+        </div>
+        </div>
+        </div>
+    </div>
+</div>
+  <!-- modal confirmar -->
+  <?php } ?>
+
+<!-- Modal cita -->
+<div class="modal fade " id="citaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div style="border-bottom: 0 !important;" class="modal-header">
+        <button style="padding: 0 10px 0 0 !important;color: rgb(63, 63, 63);" type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+      <h1 class="text-center" style="color: rgb(63, 63, 63); font-weight: bold;margin-top: -10px">Haga su cita</h1><hr class="modal-hr">
+    <div id="container-main" class="container" style="margin-top: 0 !important;">
+    <?php 
+      $meses = array(00=>"Error",'01'=>"Enero",'02'=>"Febrero",'03'=>"Marzo",'04'=>"Abril",'05'=>"Mayo",'06'=>"Junio",'07'=>"Julio",'08'=>'Agosto','09'=>'Septiembre','10'=>'Octubre','11'=>'Noviembre','12'=>'Diciembre'); 
+        foreach($this->Eventos as $Evento){           
+          ?>
+          <div class="accordion-container">
+            <a href="#" class="accordion-titulo"><?php echo $Evento->DIA. " de ".$meses[$Evento->MES].' de '.$this->ANO; ?><span class="toggle-icon"></span></a>
+            <div class="accordion-content" style="color:black">
+            <form name="Cita" class="EnviarCita" action="<?php echo $this->url('citaC') ?>" method="post">
+              <div class="form-group">
+                <select class="form-control" name="ID_USUARIO">
+                  <?php foreach($inversionista as $inv){?> 
+                  <option value="<?php echo $inv->ID ; ?>"><?php echo $inv->NOMBRE.' '.$inv->APELLIDOS; ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+
+            <div class="response">
+            <div class="response2"></div>
+            
+            <input type="hidden" name="ID_FECHA" value="<?php echo $Evento->ID; ?>">
+            <input type="hidden" name="ID_EMPRESA" value="<?php echo $usuario->ID_EMPRESA; ?>">
+            <?php 
+              foreach($this->Horarios[$Evento->ID] as $Horario){ 
+                if(!ISSET($Horario->ID_USUARIO)){
+                ?>
+                <input type="hidden" value="<?php echo $Horario->ID ?>">
+            <div class="radio">
+            <label style="font-weight: bold; color: rgb(63, 63, 63);"><input  type="radio" value="<?php echo $Horario->ID; ?>" name="ID_HORARIO" required> <?php echo $Horario->NOMBRE; ?></label>
+            </div>
+              <?php  }} ?>
+              <button type="submit" class="enviar btn btn-default">Asignar cita</button>
+              </div>
+              </form>
+              </div>
+              </div>
+    <?php  } ?>
+    
+    
+    
+</div>
+	 </div>
+  </div>
+</div>

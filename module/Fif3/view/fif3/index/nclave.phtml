@@ -1,0 +1,56 @@
+<script>
+$(document).ready(function() {
+
+$('#DatosEnviar3').submit(function() {
+	frm = $(this);
+    btn = frm.find("#enviar");
+    method = frm.attr("method");
+    btn.attr("disabled", "disabled");
+    $.ajax({
+        url: frm.attr('action'),
+        type: method,
+        data: frm.serialize(),
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function(data){
+    		btn.removeAttr("disabled");
+    		frm.find('.response').html(data).hide().slideDown();
+    		},
+    	error:function(data, msg){
+    			btn.removeAttr("disabled");
+    			frm.find('.response').html(data).hide().slideDown();
+    			},
+    });
+    return false;
+
+});
+
+});
+
+</script>
+<H1 class="text-center">Ingrese su nueva clave</H1>
+<?php
+$this->form->setAttributes(array('id'=>'DatosEnviar3','action'=> $this->url('gclave',array('ano'=>$this->ANO)),'method' => 'post'));
+$this->form->prepare();
+
+echo $this->form()->openTag($this->form);
+?>
+<div class="response"></div>
+<div class="row">
+<div class="col-md-4"></div>
+<div class="col-md-4">
+<?php
+echo $this->formRow($this->form->get('ID'));
+echo $this->formRow($this->form->get('CLAVE'),null,null,'partial/formRow.phtml');
+echo $this->formRow($this->form->get('captcha'),null,null,'partial/formRow.phtml');
+?>
+<div class="response"></div>
+<?php
+echo $this->formRow($this->form->get('enviar'),null,null,'partial/formRow.phtml');
+echo $this->form()->closeTag();
+?>
+</div>
+<div class="col-md-4"></div>
+</div>

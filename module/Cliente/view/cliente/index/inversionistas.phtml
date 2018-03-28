@@ -1,0 +1,177 @@
+<script>
+  $(document).ready(function() {
+
+  $('#DatosEnviar3').submit(function() {
+    frm = $(this);
+      btn = frm.find("#enviar");
+      method = frm.attr("method");
+      btn.attr("disabled", "disabled");
+    $.ajax({
+          url: frm.attr('action'),
+          type: method,
+          data: frm.serialize(),
+          data: new FormData(this),
+          contentType: false,
+          cache: false,
+          processData: false,
+          success: function(data){
+          btn.removeAttr("disabled");
+          frm.find('.response').html(data).hide().slideDown();
+          },
+        error:function(data, msg){
+            btn.removeAttr("disabled");
+            frm.find('.response').html(data).hide().slideDown();
+            },
+      });
+      return false;
+
+  });
+
+  });
+
+</script>
+
+<style>
+  .inversion{
+      width: 100%;
+      margin-top: 35px;
+  }
+  .row{
+    margin-top: 20px;
+  }
+  .boton{
+    color: white!important;
+    background: rgb(63, 63, 63);
+    padding: 7px 14px 7px 14px;
+    border-radius: 30px;
+    font-size: 20px;
+  }
+  .table{
+    margin-top: 25px;
+    margin-bottom: 70px;
+  }
+  .tread{
+    background: rgb(97, 97, 97);
+  }
+  .tread th{
+    color: white;
+  }
+  .modal-content{
+    background: url('<?php echo $this->basePath()?>/img/cliente/trama-1.png'), white;
+    background-size: cover;
+  }
+  .modal-hr{
+    width: 40%;
+    height: 2px; 
+    background: rgb(63, 63, 63);
+  }
+  .form-control{
+    background: transparent!important;
+    border-radius: 30px;
+    border: solid 1px rgb(63, 63, 63);
+  }
+  .modal-content h1{
+    color: rgb(63, 63, 63);
+  }
+  .btn{
+    width: 100%; 
+    background: rgb(63, 63, 63);
+    border-radius: 30px;
+    border: none; 
+  }
+  .btn:hover{
+    background: #282829!important;
+  }
+  #FilaCampos{    
+    margin-top: -20px;
+    margin-bottom: -10px;
+  }
+</style>
+<div class="container">
+  <img class="inversion" src="<?php echo $this->basePath() ?>/img/cliente/inversion.jpg" alt="">
+
+  <div class="row">
+    <div class="col-md-7">
+      <h3>Invita a tus potenciales inversionistas a la feria</h3>
+    </div>
+    <div class="col-md-5 text-right">
+    <a class="boton" href="#" data-toggle="modal" data-target="#myModal">Nuevo inversionista</a>
+    </div>
+  </div>
+
+  <table class="table ">
+  <thead>
+    <tr class="tread text-center">
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Email</th>
+      <th scope="col">Celular</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Accion</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <?php $i=1;
+      foreach($inversionista as $inv){ ?>
+      <tr class="text-center">
+      <th scope="row"><?php echo $i; ?></th>
+      <td><?php echo $inv->NOMBRE.' '.$inv->APELLIDOS; ?></td>
+      <td><?php echo $inv->EMAIL; ?></td>
+      <td><?php echo $inv->CELULAR; ?></td>
+      <td><?php echo $inv->ESTADO; ?></td>
+      <td><a href="<?php echo $this->url('citasC')?>">Cargar Cita</a></td>
+    </tr>          
+      <?php $i++;  }  ?>
+  </tbody>
+</table>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div style="border-bottom: 0 !important;" class="modal-header">
+        <button style="padding: 0 10px 0 0 !important;color: rgb(63, 63, 63);" type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+<H1 class="text-center">Reg&iacute;stra tu inversionista</H1><hr class="modal-hr">
+      <div class="modal-body">
+      <?php
+ $this->form->setAttributes(array('id'=>'DatosEnviar3','action'=> $this->url('nregistroC'),'method' => 'post'));
+ $this->form->prepare();
+
+ echo $this->form()->openTag($this->form);
+?>
+<div class="response"></div>
+    
+<input type="hidden" name="CLIENTE_EDITAR" value="<?php echo $usuario->ID; ?>">
+            <?php
+         echo $this->formRow($this->form->get('NOMBRE'),null,null,'partial/formRow.phtml');
+         echo $this->formRow($this->form->get('APELLIDOS'),null,null,'partial/formRow.phtml');
+         echo $this->formRow($this->form->get('EMAIL'),null,null,'partial/formRow.phtml');
+         echo $this->formRow($this->form->get('CLAVE'),null,null,'partial/formRow.phtml');
+         echo $this->formRow($this->form->get('CELULAR'),null,null,'partial/formRow.phtml'); ?>
+   
+   
+            <?php
+        
+         echo $this->formRow($this->form->get('captcha'),null,null,'partial/formRow.phtml');
+        ?>
+
+            <style>
+            </style>
+        <div class="response"></div>
+        <?php
+         echo $this->formRow($this->form->get('enviar'),null,null,'partial/formRow.phtml');
+         echo $this->form()->closeTag();
+        ?>
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+

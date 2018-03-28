@@ -1,0 +1,78 @@
+
+<script>
+	$(document).ready(function() {
+		$('#Session2').submit(function() {
+			frm = $(this);
+			btn = frm.find("#enviar");
+			method = frm.attr("method");
+			btn.attr("disabled", "disabled");
+			$.ajax({
+				url: frm.attr('action'),
+                type: method,
+                data: frm.serialize(),
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data){
+                    btn.removeAttr("disabled");
+                    frm.find('.response').html(data).hide().slideDown();
+                },
+                error:function(data, msg){
+                    btn.removeAttr("disabled");
+                    frm.find('.response').html(data).hide().slideDown();
+                },
+            });
+            return false;
+        });
+	});
+</script>
+<style>
+    .main_bg{
+        background: url('<?php echo $this->basePath() ?>/img/layout/session.jpg') !important;
+        background-repeat: no-repeat !important;
+        background-size: 100% 100% !important;
+    }
+    .margen-1{
+        margin: 50px 0 0 0;
+        padding-bottom: 80px;
+    }
+    hr{
+        background: white;
+        width: 100%;
+        height: 3px
+    }
+
+</style>
+<div class="margen-1">
+    <div class="row">
+        <div class="col-md-6 text-left"> 
+        <H1 style="line-height: 0.5; font-weight: 900;">Iniciar <h1 style="font-weight: 100;">Sesi&oacute;n</h1></H1><hr> 
+        
+			<a style="color: white; font-size:25px" href="<?php echo $this->url('olvidoclave',array('ano'=>$this->ANO))?>">¿Olvido su clave?</a><br>
+			<a style="color: white; font-size:25px" href="<?php echo $this->url('registro',array('ano'=>$this->ANO))?>">Reg&iacute;strate</a>
+        </div>
+        <div style="margin-top: 70px; margin-bottom: 70px" class="col-md-6  text-center"><?php
+				    $this->form->setAttributes(array('id'=>'Session2','action'=>$this->url('isession',array('ano'=>$this->ANO)),'method' => 'post'));
+				    $this->form->prepare();
+
+				    echo $this->form()->openTag($this->form);
+                    ?>
+                    <div class="response"></div>
+                    <?php
+                    echo $this->formRow($this->form->get('EMAIL'),null,null,'partial/formRow.phtml');
+                    echo $this->formRow($this->form->get('CLAVE'),null,null,'partial/formRow.phtml');
+                    ?>
+                    <div class="response"></div>
+                    <?php
+                    echo $this->formRow($this->form->get('enviar'),null,null,'partial/formRow.phtml');
+                    echo $this->form()->closeTag();
+                    ?>
+                    <style>
+                    .btn{
+                        width: 100%;
+                    }
+                    </style></div>
+					
+    </div>
+</div>

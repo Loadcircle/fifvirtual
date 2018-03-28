@@ -1,0 +1,295 @@
+    <!-- Boton -->
+    <style>
+     .hover_2{
+        transition: all ease 0.5s;
+      }
+      .hover_2:hover{
+        opacity: 0.5;
+        filter: alpha(opacity=50); /* For IE8 and earlier */
+      }
+        @media only screen and (max-width: 500px) {
+            .mobile-cover{
+                background-image: url('<?php echo $this->basePath('img/layout/'.$this->Publicidades[6]->IMAGEN) ?>') !important;
+            }
+            .p-res{
+                font-size: 10px!important;
+            }
+        }
+        @media screen and (min-width: 1500px) {
+            .h3-res{
+                font-size: 40px!important;
+            }
+            .h-res{
+                font-size: 40px!important;
+            }
+            .titulo-1{
+                font-size: 30px !important;
+            }
+            .text{
+                font-size: 23px !important;
+            }
+        }
+    </style>
+    <div class="mobile-cover" style=" background-image: url('<?php echo $this->basePath('img/layout/'.$this->Publicidades[0]->IMAGEN) ?>');background-size: 100% 100%;background-position: 50% center;background-repeat: no-repeat;height: 100vh;" class="main_cover"><div class="boton"><a href="<?php echo $this->url('fif',array('ano'=>'2018'))?>"><?php echo $this->Publicidades[0]->TITULO ?></a></div></div> 
+    <!-- Boton -->
+    <!-- Contador -->
+    <div class="reloj text-center" id="eventos" style="display: flex; justify-content:center;padding: 130px; background: url('<?php echo $this->basePath('img/layout/trama-contador.jpg')?>" >
+        <div><h1 style="color: white; font-weight: bold;">Faltan: </h1>
+            <p style="color: white; font-size: 50px; font-weight: bold; letter-spacing: 5px;" id="demo"></p>
+       </div>
+    </div>
+    <!-- Contador -->
+
+    <!-- Carrusel n1 Eventos -->
+    <div class="owl-1 owl-carousel">
+      <?php foreach($this->Eventos as $eve){ ?>
+        <div class="slider text-center" style="width: 700px; margin: auto; height: 300px;">
+        <h3 class="h3-res" style="margin-top: 100px; padding: 15px 0 15px 0; background: #ef0d63; color: white;"><?php  echo $eve->TITULO; ?></h3>
+        <div class="row">
+          <div class="col-md-4 col-sm-4 col-xs-4">
+            <h5 class="h-res" style="font-size: 40px; text-transform: uppercase; margin-top: 13px; margin-bottom: 5px; line-height: 1;">Cuando</h5>
+            <h3 class="h-res" style="font-weight: bold; font-size: 90px; line-height: 0.7;"><?php  echo $eve->DIA; ?></h3>
+            <h5 class="h-res" style="font-weight: bold; font-size: 50px;"><?php  echo $eve->MES; ?></h5>
+          </div>
+          <div class="col-md-8 col-sm-8 col-xs-8">
+            <h5 class="h-res" style="font-size: 40px; text-transform: uppercase; margin-top: 13px; margin-bottom: 20px;">Donde</h5>
+            <h4 class="h-res" style="font-weight: normal; font-size: 30px; line-height: 0.7"><?php  echo $eve->LUGAR; ?></h4>
+            <h2 class="h-res" style="font-weight: bold; font-size: 70px; line-height: 0.7"><?php  echo $eve->LUGAR_2; ?></h2>
+          </div>
+        </div>
+      </div>
+
+        <?php
+      } ?>
+   </div>
+    <!-- Carrusel n1 Eventos -->
+ 
+        <!-- Nosotros//Como funciona -->
+    <div id="como" class="nosotros text-center" style="margin-top: 100px; color: white;">
+      <div class="row" style="height: 500px !important; margin: 0;">
+        <div class="col-md-6 col-sm-12 col-xs-12 hover_1" style="padding: 0;">
+          <img style="cursor: pointer;" type="button" data-toggle="modal" data-target="#exampleModal" src="<?php echo $this->basePath('img/layout/'.$this->Publicidades[1]->IMAGEN) ?>" width="100%" height="100%">
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12 hover_1" style="overflow: auto; background: #ce0552; text-align: left;">
+          <h1 class="h1-res" style="font-weight: bold; margin-top: 80px; margin-left: 60px; font-size: 50px; line-height: 1;">¿C&oacute;mo</h1><h1 class="h1-res" style="font-size: 50px; line-height: 1;font-weight: lighter; margin-left: 60px;">funciona Fifvirtual? </h1>
+          <p class="p-res" style="margin-left: 60px;margin-right: 100px; font-size: 15px; margin-top:40px;"><?php echo $this->Textos[0]->texto;?></p>
+        </div>
+      </div>
+      <div style="background: url('<?php echo $this->basePath('img/layout/'.$this->Publicidades[2]->IMAGEN) ?>'); background-size: 100% 100%; height: 500px;">
+          <div class="row" style="height: 500px !important; margin: 0;">
+              <div class="col-md-6 col-sm-12 col-xs-12" style="padding: 0;">
+               </div>
+              <div class="col-md-6 col-sm-12 col-xs-12" style="overflow: auto; display:flex; align-items: center">
+              <p class="p-res" style="font-size: 15px; font-weight: normal; margin: 0px 30px 0 20px; text-align: justify;"><?php echo $this->Textos[1]->texto;?></p>  
+              </div>
+            </div>
+      </div>
+    </div>
+        <!-- Nosotros//Como funciona -->
+
+
+      <!-- Servicios -->
+      <style>
+        .container-1 {
+          position: relative;
+          width: 50%;
+          margin: auto;
+        }
+
+        .image {
+          display: block;
+          width: 100%;
+          height: 180px;
+        }
+
+        .overlay {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background-color: white;
+          overflow: auto;
+          width: 0;
+          height: 100%;
+          transition: .2s ease;
+          overflow: hidden;
+        }
+
+        .container-1:hover .overlay {
+          width: 100%;
+        }
+        .container-1:hover .text {
+          color: black;
+          transition: 2s;
+        }
+
+        .text {
+          color: black;
+          font-size: 1.5vw;
+          font-weight: bold;
+          margin: auto;
+          color: white;
+          transition: all 2s;
+        }
+        @media screen and (max-width: 760px){
+          .text{
+            font-size: 2vw;
+          }
+          .titulo-1{
+            font-size: 2.5vw;
+          }
+        }
+      </style>
+      <div class="container text-center">
+        <h1 style="font-size: 50px; font-weight: bold; margin-top: 80px; margin-bottom: 50px;">Que puedo hacer en la Fifvirtual</h1>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="container-1">
+              <img src="<?php echo $this->basePath('img/layout/servicio1.png')?>" alt="Avatar" class="image">
+              <p class="titulo-1" style="font-size: 2vw; font-weight: bold; color: #212529"><?php echo $this->Textos[3]->NOMBRE;?></p>
+              <div class="overlay">
+                <div class="text" ><?php echo $this->Textos[3]->texto;?></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="container-1">
+              <img src="<?php echo $this->basePath('img/layout/servicio2.png')?>" alt="Avatar" class="image">
+              <p class="titulo-1" style="font-size: 2vw; font-weight: bold; color: #212529"><?php echo $this->Textos[4]->NOMBRE;?></p>
+              <div class="overlay">
+                <div class="text" ><?php echo $this->Textos[4]->texto;?></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="container-1">
+              <img src="<?php echo $this->basePath('img/layout/servicio3.png')?>" alt="Avatar" class="image">
+              <p class="titulo-1" style="font-size: 2vw; font-weight: bold; color: #212529"><?php echo $this->Textos[5]->NOMBRE;?></p>
+              <div class="overlay">
+                <div class="text" ><?php echo $this->Textos[5]->texto;?></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Servicios -->
+
+
+        <!-- Carrusel n2,n3 Marcas -->
+     <div id="marcas" class="text-center">
+        <h1 style="font-size: 50px; font-weight: bold; margin-top: 80px; margin-bottom: 50px;">Marcas participantes</h1>
+
+        <div class="owl-2 owl-carousel text-center" style="margin-top: 100px;">
+
+        <?php   foreach($this->Marcas as $mar){ ?>
+              <a style="color:rgb(63, 58, 58); font-weight: bold; font-size: 18px;" href="<?php  echo $mar->WEB; ?>" target="_blank"><img src="<?php echo $this->basePath('img/Logo_Empresas/'); echo $mar->IMAGEN_ARCHIVO; ?>" style="width: 130px !important; margin:auto;" alt="">
+                <p><?php  echo $mar->NOMBRE; ?></p></a> 
+                      <?php  }   ?> 
+        </div>
+        <div class="owl-3 owl-carousel text-center" style="margin-top: 100px;">
+
+           <?php   foreach($this->Marcas1 as $mar1){ ?>
+              <a style="color:rgb(63, 58, 58); font-weight: bold; font-size: 18px;" href="<?php  echo $mar1->WEB; ?>" target="_blank"><img src="<?php echo $this->basePath('img/Logo_Empresas/'); echo $mar1->IMAGEN_ARCHIVO; ?>" style="width: 130px !important; margin:auto;" alt="">
+                <p><?php  echo $mar1->NOMBRE; ?></p></a> 
+                      <?php  }   ?> 
+        </div>
+    </div>
+        <!-- Carrusel n2,n3 Marcas -->
+
+        <!-- Parallax//video -->
+    <div class="banner_video" style="margin-top: 80px;background: url('<?php echo $this->basePath('img/layout/'.$this->Publicidades[3]->IMAGEN) ?>'); height: 400px;  background-attachment: fixed;background-position: center; background-repeat: no-repeat;background-size: cover;"></div>
+        <!-- Parallax//video -->
+
+        <!-- Participa -->
+    <div id="participa" class="text-center" style="margin-top: 90px;">
+        <h1 style="margin-bottom: 90px; font-size: 50px; font-weight: bold;">Participa como:</h1>
+      <div style="margin-left: 0!important;margin-right:0 !important; background: #ef0d63;" class="row">
+            
+          <a href="http://fifvirtual.com/Cliente/" style="padding: 0!important" class="col-md-6 hover_2"><div  style="display: flex; justify-content: center; align-items: center;height: 500px;background: url('<?php  echo $this->basePath('img/layout/'.$this->Publicidades[4]->IMAGEN) ?>'); background-size: 100% 100%;">
+            </div></a> 
+            <a href="<?php echo $this->url('fif',array('ano'=>'2018'))?>" style="padding: 0!important" class="col-md-6 hover_2">
+          <div  style="display: flex; justify-content: center; align-items: center;height: 500px; background: url('<?php echo $this->basePath('img/layout/'.$this->Publicidades[5]->IMAGEN) ?>'); background-size: 100% 100%;">
+              
+          </div></a>
+    </div>
+    </div>
+        <!-- Participa -->
+        
+
+        <!-- Contacto -->
+    <div id="contacto" class="contacto-res" style="margin-top: 150px;background: rgb(238, 233, 233)">
+      <div  class="text-left contacto-res py-5 margin-0" style="margin: 0 200px 0 200px;">
+      <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <h4>Puedes encontrarnos en</h4>
+          <p><i class="fas fa-map-marker-alt"></i> Calle Ernesto Plasencia 166, San Isidro 15073</p>
+          <p><i class="fas fa-mobile-alt"></i> info@fifvirtual.com</p>
+          <p><i class="fas fa-mobile-alt"></i> +51 994 031 760 </p>
+          <p>Organiza</p>
+          <img src="<?php echo $this->basePath('img/layout/');?>logo.png" width="150px;" style="background: rgba(0, 0, 0, 0.4); padding: 0 10px 0 10px;">
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <h4>Cont&aacute;ctanos</h4>
+          <style>
+                   .btn{
+                        width: 100%; background: #ce0552; border-color: #ce0552;
+                    }
+                    #FilaCampos #Label{
+                        display:none;
+                    }
+          </style>
+          <?php
+            $this->form->setAttributes(array('id'=>'DatosEnviar3','action'=> $this->url('enviar_comentario'),'method' => 'post'));
+            $this->form->prepare();
+
+            echo $this->form()->openTag($this->form);
+            ?>
+            <div class="response"></div>
+                <div class="form-group">
+                <?php echo $this->formRow($this->form->get('EMAIL'),null,null,'partial/formRow.phtml'); ?>
+                    </div>
+                <div class="form-group">     
+                    <?php echo $this->formRow($this->form->get('NOMBRE'),null,null,'partial/formRow.phtml'); ?>
+                </div>
+                <div class="form-group">
+                <?php echo $this->formRow($this->form->get('TELEFONO'),null,null,'partial/formRow.phtml');?>
+                </div>
+                <div class="form-group">
+                    
+                <?php echo $this->formRow($this->form->get('MENSAJE'),null,null,'partial/formRow.phtml');?>
+                </div>
+
+                    <?php echo $this->formRow($this->form->get('captcha'),null,null,'partial/formRow.phtml');
+                    ?>
+                    <style>
+                    .btn{
+                        width: 100%; background: #ce0552; border-color: #ce0552;
+                    }
+                    #FilaCampos #Label{
+                        display:none;
+                    }
+                    </style>
+                  <div class="response"></div>
+                        <?php
+                        echo $this->formRow($this->form->get('enviar'),null,null,'partial/formRow.phtml');
+                        echo $this->form()->closeTag();
+                        ?> 
+          </div>
+        </div>
+      </div>
+    </div>
+        <!-- Contacto -->
+         
+        <!-- Modal -->
+    <div class="modal fade" style="top:100px;" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <iframe width="100%" height="300px"
+                    src="https://www.youtube.com/embed/<?php echo $this->Videos[0]->youtube;?>?rel=0&controls=1&showinfo=0&html5=1&allowfullscreen=true&wmode=transparent&autoplay=0" allowfullscreen>
+                    </iframe>
+                </div>
+                </div>
+    </div>
+        <!-- Modal -->
+
+  

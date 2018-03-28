@@ -1,0 +1,218 @@
+<script>
+  $(document).ready(function() {
+
+  $('.CancelarCita').submit(function() {
+    frm = $(this);
+      btn = frm.find(".enviar");
+      method = frm.attr("method");
+      btn.attr("disabled", "disabled");
+      $.ajax({
+          url: frm.attr('action'),
+          type: method,
+          data: frm.serialize(),
+          data: new FormData(this),
+          contentType: false,
+          cache: false,
+          processData: false,
+          success: function(data){
+          frm.find('.response').html(data).hide().slideDown();
+          console.log('llegaste aca');
+          },
+        error:function(data, msg){
+        console.log('dio error',data,msg);
+            btn.removeAttr("disabled");
+            frm.find('.response2').html(data).hide().slideDown();
+            },
+      });
+      return false;
+
+  });
+
+  });
+</script>
+
+<style>
+    body{
+        background: white !important;
+    }
+    .main_bg{
+        background-color: white !important;
+        background: url('<?php echo $this->basePath() ?>/img/layout/cita.jpg') !important;
+        background-repeat: no-repeat !important;
+        background-size: 100% 300px !important;
+    }
+
+    hr{
+        background: white;
+        width: 100%;
+        height: 5px
+    }
+    .trama{
+        position: absolute;
+        width: 100%;
+        max-width: 1200px;
+        height: 1000px;
+        margin-top: -10px;
+        z-index: -1;
+    }
+    .container-1{
+        margin: 200px 5% 0 5%;
+        z-index: 1000;
+    }
+    .fecha{
+        border: solid blue 4px;
+        width: 215px;
+        height: 180px;
+    }
+    .hr-1{
+        background: #00b7ff;
+        height: 3px
+    }
+    .hr-2{
+        background: #796c6c;
+        height: 5px;
+        width: 100%;
+    }
+    .modal-body a, .modal-body p, .modal-body h1, .modal-body h2, .modal-body h3{
+        color: #2f2e2e!important;
+    } 
+    @media (max-width: 575px) {
+    .b-detalles{
+        font-size: 3vw !important;
+        line-height: 3;
+    }
+    .b-cancelar{
+        font-size: 3vw !important;
+    }
+    .modal-h1{
+        font-size: 5vw!important;
+    }
+    .cuadro-fecha{
+        margin-left: 46%!important;
+    }
+    .modal-hora{
+        width: 100px!important;
+    }
+    .modal-h3{
+        font-size: 5vw!important;
+    }
+    }
+</style>
+<br>
+<h1 style="display: inline">Mis</h1><h1 style="font-weight: 900; display: inline;"> Citas</h1><hr>
+
+<img class="trama" src="<?php echo $this->basePath() ?>/img/layout/tramacitas.png" alt="">
+
+<div class="container-1">
+<?php 
+        $meses = array(00=>"Error",'01'=>"Ene",'02'=>"Feb",'03'=>"Mar",'04'=>"Abr",'05'=>"May",'06'=>"Jun",'07'=>"Jul",'08'=>'Ago','09'=>'Sep','10'=>'Oct','11'=>'Nov','12'=>'Dic'); 
+        foreach($this->Eventos as $Evento){ ?>
+
+    <div style="display: flex;">
+    
+        <div style="display: flex; justify-content: center; align-items: center;" class="text-center fecha">
+
+        <div>
+            <h1 style="color: black; display: inline; font-weight: 900;"><?php echo $Evento->DIA; ?></h1><h1 style="color: black; display: inline;"> de</h1>
+            <h1 style="color: black; font-weight: 900;"><?php echo $meses[$Evento->MES]; ?></h1>
+            </div>
+        </div>
+        <div style="display-inline;width: 80%">
+            <div style="margin: 7%">
+
+            <?php foreach($this->cita as $citas){  if($citas->ID_FECHA == $Evento->ID){  ?>
+
+                <div style="margin-bottom: 30px">
+                    <h3 style="z-index: 1000; color: black;"><?php echo $citas->NOMBRE_EMPRESA ?></h3><hr class="hr-1">
+                    <h4 style=" color: black;">Hora: <?php echo $citas->HORA ?></h4>
+                    <h4 style=" color: black;">Codigo: <?php echo $citas->CODIGO ?></h4>
+                    <a href="#" class="b-detalles" style="color: black;padding: 5px 10px 5px 10px; border-radius: 30px; border: solid black 1px;" data-toggle="modal" data-target="#detalles<?php echo $citas->CODIGO; ?>">Detalles de la Cita</a>
+                    <a href="#" class="b-cancelar" style="color: black;padding: 5px 10px 5px 10px; border-radius: 30px; border: solid black 1px;" data-toggle="modal" data-target="#cancelar<?php echo $citas->CODIGO; ?>">Cancelar Cita</a>
+                    <?php if($citas->AGENDA_CITA == 'SI'){  ?>
+                            <h5 style="margin-top: 5px;color: #00a4e5 !important; font-weight: 900" class="">Su cita ha sido aceptada y est&aacute; programada.</h5>
+                            <?php }else{ ?>
+                            <h5 style="margin-top: 5px;color: #d02d2d !important; font-weight: 900" class="">La empresa aun no confirma su cita.</h5>
+                            <?php }?>
+                </div>
+                        <!-- modal cancelar -->
+                        <div id="cancelar<?php echo $citas->CODIGO; ?>" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div style="top: 70px;border: 0 !important; border-radius: 0 !important;-webkit-box-shadow: 0px 0px 56px -2px rgba(0,0,0,0.72);-moz-box-shadow: 0px 0px 56px -2px rgba(0,0,0,0.72);box-shadow: 0px 0px 56px -2px rgba(0,0,0,0.72);background: #e8e8e8;" class="modal-content">
+                                <div class="modal-body">
+                                <div class="text-center">
+                                    <H1 style="color: #01014e !important; font-weight: 900;">¿Desea cancelar la cita?</H1>
+                                    <form name="CancelarCita" class="CancelarCita" action="<?php echo $this->url('CancelarCita',array('ano'=>$this->ANO)) ?>" method="post">
+                                    <div class="response">
+                                    <div class="response2"></div>
+                                    <input type="hidden" name="ID_CITA" value="<?php echo ' '.$citas->ID; ?>">
+                                    <a style="width: 120px;padding: 5px 10px 5px 10px; border: solid #00a4e5 2px; border-radius: 30px" class="btn btn-default" data-dismiss="modal">No, volver</a>
+                                    <button type="submit" class="enviar btn btn-default" style="width: 120px;padding: 5px 10px 5px 10px; border: solid #d02d2d 2px; border-radius: 30px" >SI, cancelar</button>
+                                    </div>
+                                    </form>                        
+                                </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- modal cancelar -->
+
+                        <!-- modal Detetalles       -->
+                        <div  id="detalles<?php echo $citas->CODIGO; ?>" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div style="top: 70px;border: 0 !important; border-radius: 0 !important;-webkit-box-shadow: 0px 0px 56px -2px rgba(0,0,0,0.72);-moz-box-shadow: 0px 0px 56px -2px rgba(0,0,0,0.72);box-shadow: 0px 0px 56px -2px rgba(0,0,0,0.72);background: #e8e8e8;" class="modal-content">
+                                
+                                <div class="text-center modal-body">
+                                    <div style="text-align: left;">
+                                        <div class="cuadro-fecha" style="position:absolute;display: flex; justify-content: center; align-items: center; width: 190px; height: 190px;margin: -45px 320px;" class="text-center fecha">
+                                            <div>
+                                                <h1 class="modal-h1" style="font-size: 25px;color: black; display: inline; font-weight: 900;"><?php echo $Evento->DIA; ?></h1>
+                                                <h1 class="modal-h1"  style="font-size: 25px;color: black; font-weight: 900;"><?php echo $meses[$Evento->MES]; ?></h1>
+                                                <h1 class="modal-h1 modal-hora"  style="font-size: 25px;color: black;"><?php echo $citas->HORA; ?></h1>
+                                            </div>
+                                        </div>
+                                        <div style="width: 30%">
+                                        <h1 class="modal-h1"  style="color: blue!important">Tu</h1><h1 class="modal-h1"  style="color: blue!important; font-weight: 900;">Cita</h1><hr style="background: blue; height: 3px;">
+                                        </div>
+                                        <div class="row" style="margin-top: 50px; margin-bottom: 50px">
+                                            <div class="col-md-6">
+                                                <h3 class="modal-h3" ><i class="fas fa-qrcode"> </i> <?php echo ' '.$citas->CODIGO; ?></h3>
+                                                <h3 class="modal-h3"><i class="fas fa-street-view"></i> Stand: <?php echo ' '.$citas->STAND; ?></h3>
+                                            </div>
+                                            <div class="col-md-6">                                     
+                                                <h3 class="modal-h3"><i class="fas fa-building"></i>  <?php echo ' '.$citas->NOMBRE_EMPRESA; ?></h3>
+                                            </div>
+                                        </div>
+                                        <?php if($citas->AGENDA_CITA == 'SI'){  ?>
+                                        <h3 class="modal-h3" style="color: #00a4e5 !important; font-weight: 900" class="text-center">Su cita ha sido aceptada y est&aacute; programada.</h3>
+                                        <?php }else{ ?>
+                                        <h3 class="modal-h3" style="color: #d02d2d !important; font-weight: 900" class="text-center">La empresa aun no confirma su cita.</h3>
+                                        <?php }?>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- modal Detetalles       -->
+                       
+                        
+             </div>
+
+
+            <?php } else {} }?>
+            </div>
+        </div>
+
+    </div>
+    <hr class="hr-2">
+    
+<?php } ?>
+
+</div>
+
+
+        
+

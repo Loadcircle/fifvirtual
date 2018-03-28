@@ -1,0 +1,368 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <?php echo $this->headTitle('FIF '. $this->translate('Virtual'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.png'))
+                        ->prependStylesheet($this->basepath('css/sweetalert.css'))
+                        ->prependStylesheet($this->basePath('js/owl/dist/assets/owl.carousel.min.css')) ?>
+                        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath('js/sweetalert.min.js'))
+             ; ?>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+    <body>
+
+
+<div class="Sesion">
+
+    <?php if(!isset($this->Usuario)||$this->Usuario==''){?>
+        <!--Script de la Sesion-->
+        <script>
+                        $(document).ready(function() {
+                        $('#Session').submit(function() {
+                            frm = $(this);
+                            btn = frm.find("#enviar");
+                            method = frm.attr("method");
+                            btn.attr("disabled", "disabled");
+                            $.ajax({
+                                url: frm.attr('action'),
+                                type: method,
+                                data: frm.serialize(),
+                                data: new FormData(this),
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success: function(data){
+                                    btn.removeAttr("disabled");
+                                    frm.find('.response').html(data).hide().slideDown();
+                                    },
+                                error:function(data, msg){
+                                        btn.removeAttr("disabled");
+                                        frm.find('.response').html(data).hide().slideDown();
+                                        },
+                            });
+                            return false;
+
+                        });
+
+                        });
+
+        </script>
+        <!--Script de la Sesion-->  
+        
+</div>  
+    <style>
+        *{
+            color: black;
+        }
+        body{
+            background: url('<?php echo $this->basePath() ?>/img/cliente/fondo.jpg');
+            background-position: center;
+            background-size: 100% 100%;
+        }
+        .login{
+            background: url('<?php echo $this->basePath() ?>/img/cliente/trama.jpg');            
+            margin-top: 8%!important;
+            margin-bottom: 10%!important;
+            width: 76% !important;
+        }
+        .logo{
+            width: 120px;
+        }
+        .h3-1{
+            color: white;
+            font-size: 25px;
+        }
+        .form-control{
+            background-color: transparent!important;
+            border-radius: 100px;
+            border: solid white 3px!important;
+            color: white!important;
+            width: 70%;
+            height: 35px;
+            margin: auto!important;
+        }
+        .fa-user *{
+            color: white !important;
+        }
+        .derecho{
+            margin-top: 50px;
+        }
+        footer a{
+            color: white;
+        }
+        body{
+            padding: 0 !important;
+        }
+        .hover_1{
+            transition: all 0.4s ease-in;
+        }
+        .hover_1:hover{
+            transform: scale(1.1);
+        }
+        .btn{
+            color: #676464!important;
+            background: white!important;
+            border: none;
+            border-radius: 100px;
+            width: 50%;
+            height: 35px;
+        }
+    </style>
+        <div class="container text-center my-5 login">  
+            <?php
+                        $this->form->setAttributes(array('id'=>'Session','action'=>$this->url('isessionC'),'method' => 'post'));
+                        $this->form->prepare();
+
+                        echo $this->form()->openTag($this->form);
+                        ?>
+                        <div class="response"></div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img class="logo" src="<?php echo $this->basePath() ?>/img/cliente/logo.png" alt="">
+                                <?php
+                                echo $this->formRow($this->form->get('enviar'),null,null,'partial/formRow.phtml');
+                                ?><br/>
+                                <a class="btn btn-primary" href="#">¿Olvido su clave?</a><br>                           
+                                <br/>
+                            </div>
+                            <div class="col-md-7 derecho">
+                                <h3 class="h3-1"><i class="fas fa-user"></i> Panel de control del cliente</h3>
+                                <?php
+                                echo $this->formRow($this->form->get('EMAIL'),null,null,'partial/formRow.phtml');
+                                echo $this->formRow($this->form->get('CLAVE'),null,null,'partial/formRow.phtml');
+                                ?>
+                                <div class="response"></div>
+                            </div>
+                        </div>
+                        <?php 
+                        echo $this->form()->closeTag();
+                        ?>
+        </div>  
+            <?php }else{ ?>
+                <!--Script cierre de sesion-->
+                <script>
+                                $(document).ready(function() {
+                                    $('a.cerrarsession').click( function( e ){
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        frm = $('.Sesion');
+                                        $.ajax({
+                                            url:  '<?php echo $this->url('cerrarsessionC')?>',
+                                            type: 'post',
+                                            data: null,
+                                            data: null,
+                                            contentType: false,
+                                            cache: false,
+                                            processData: false,
+                                            success: function(data){
+                                                frm.find('.response').html(data).hide().slideDown();
+                                            },
+                                            error:function(data, msg){
+                                                frm.find('.response').html(data).hide().slideDown();
+                                            },
+                                        });
+
+                                    });
+
+                                });
+
+                </script>
+                <!--Script cierre de sesion-->
+                    <style>
+                        .navbar-collapse{
+                            justify-content: flex-end;
+                        }
+                        .container-1{
+                            margin: auto;
+                            width: 80%;
+                            padding-top: 55px;
+                            padding-bottom: 65px;
+                        }
+                        .hr-1{
+                            position: absolute;
+                            margin-top: 30px;
+                            background: white !important;
+                            width: 96% !important;
+                            height: 2px !important;
+                        }
+                        .bg-nav{
+                            background: url('<?php echo $this->basePath() ?>/img/cliente/fondo-nav.png');
+                            background-size: 100% 100%;
+                        }
+                        .navbar-nav{
+                            background: white!important;
+                            border-radius: 100px;
+                        }
+                        .navbar-toggler{
+                            background: white!important;
+                        }
+                        .fa-user *{
+                            color: white !important;
+                        }
+                        .nav-link{
+                            font-size: 15px!important;
+                        }
+                        @media only screen and (max-width: 991px) {
+                            .hr-1{
+                                display: none;
+                            }
+                            .navbar-nav{
+                                border-radius: 10px;
+                            }
+                        }
+                    </style>
+                    <div class="response"></div>
+                    <!-- header nav -->
+                <header  id="inicio">
+                            <div class="bg-nav">
+                                <nav class="container-1 navbar navbar-expand-lg navbar-light">
+                                    <a style="color: white!important" class="navbar-brand" href="<?php echo $this->basePath()?>"><i class="fas fa-user"></i> Panel de control del cliente</a>
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                    <div class="collapse navbar-collapse" id="navbarNav">
+                                        <ul class="navbar-nav">
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="<?php  echo $this->basePath()?>/Cliente/">Home <span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <?php echo $Usuario->NOMBRE_EMPRESA ?>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <a class="dropdown-item" href="<?php echo $this->url('actualizardatosC')?>">Actualizar Datos</a>
+                                            <a class="dropdown-item" href="<?php echo $this->url('cambioclaveC')?>">Cambiar clave</a>
+                                            <a class="dropdown-item cerrarsession" href="#">Cerrar sesi&oacute;n</a>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="<?php echo $this->url('inversionistasC')?>">Inversionistas</a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="<?php echo $this->url('citasC')?>">Agenda de citas</a>
+                                        </li>
+                                        </ul>
+                                    </div>     
+                                <hr class="hr-1">                              
+                                </nav>
+                            </div>
+                </header>
+                    <!-- header nav -->
+            <?php echo $this->content; } ?>
+
+<style>
+    .vl {
+        border-left: 2px solid black;
+        height: 180px;
+    }
+    .back{
+        background: #de1b90;
+        color: white;
+        font-size: 20px;
+        padding: 7px 14px 7px 14px;
+        border-radius: 20px;
+        font-weight: 900;
+    }
+    @media only screen and (max-width: 767px){
+        .vl{
+            display: none; 
+        }
+    }
+
+</style>
+            <!--Footer-->
+            <footer style="background: white;/*-webkit-box-shadow: 0px -18px 35px 3px rgba(110,108,110,1);
+                -moz-box-shadow: 0px -18px 35px 3px rgba(110,108,110,1);
+                box-shadow: 0px -18px 35px 3px rgba(110,108,110,1);background: linear-gradient(to bottom, rgb(63, 63, 63), white);" 
+                class="page-footer font-small stylish-color-dark pt-4*/">
+        
+                <!--Footer Links-->
+                <div class="container text-center text-md-left">
+                    <div class="row">
+            
+                        <!--First column-->
+                        <div class="col-md-4">
+                            <h5 class="mb-4 mt-3 font-weight-bold">Fif Virtual</h5>
+                            <p>Informaci&oacute;n de cont&aacute;cto</p>
+                            <p><a href="" style="color: black">info@fifvirtual.com</a></p>
+                            <p>Calle Ernesto Plascencia 166 - San Isidro</p>
+                            <p><?php //echo $this->T->texto;?></p>
+                        </div>
+                        <!--/.First column-->
+            
+                        <hr class="clearfix w-100 d-md-none">
+                        <div class="vl"></div>
+                        <hr class="clearfix w-100 d-md-none">
+            
+                        <!--Third column-->
+                        <div class="col-md-2 mx-auto">
+                            <h5 class="mb-4 mt-3 font-weight-bold">Sigue navegando</h5>
+                            <ul class="list-unstyled">
+                                <li><a style="color: black" href="<?php  echo $this->basePath()?>/Cliente/">Home</a></li>
+                                <li><a style="color: black" href="<?php echo $this->url('inversionistasC')?>">Inversionistas</a></li>
+                                <li><a style="color: black" href="<?php echo $this->url('citasC')?>">Agenda de citas</a></li>
+                            </ul>
+                        </div>
+                        <!--/.Third column-->
+            
+                        <hr class="clearfix w-100 d-md-none">
+                        <div class="vl"></div>
+            
+                        <!--Fourth column-->
+                        <div class="col-md-2 mx-auto">
+                            <h5 class="mb-4 mt-3 font-weight-bold ">Te puede interesar</h5>
+                            <ul class="list-unstyled">
+                                <li><a style="color: black" href="http://clubfranquicia.com" target="_blank">Clubfranquicia.com</a></li>
+                                <li><a style="color: black" href="https://www.franquiciatv.com" target="_blank">Franquiciatv.com</a></li>
+                            </ul>
+                        </div>
+                        <!--/.Fourth column-->
+                    </div>
+                </div>
+                <!--/.Footer Links-->
+            
+                <!--Copyright-->
+                <div class="footer-copyright py-3 text-center">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                            © 2018 Copyright: <a style="color: black; font-weight: bold; " href="http://fifvirtual.com"> fifvirtual.com </a>
+                            </div>
+                            <div class="col-md-4">
+                                Regresar a: <a class="back" href="http://fifvirtual.com">fifvirtual.com</a>
+                            </div>
+                        </div>
+                        
+            
+                    </div>
+                </div>
+                <!--/.Copyright-->
+    
+            </footer>
+            <!--/.Footer--> 
+            <?php echo $this->inlineScript() ?>
+
+<!-- Scripts -->
+<script>
+</script>
+<!-- Scripts -->
+<!-- Realizado por: Jesus Milano -->
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>   
+     
+</body>
+</html>

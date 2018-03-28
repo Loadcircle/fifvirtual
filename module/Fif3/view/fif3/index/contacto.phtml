@@ -1,0 +1,106 @@
+<script>
+$(document).ready(function() {
+
+$('#DatosEnviar3').submit(function() {
+	frm = $(this);
+    btn = frm.find("#enviar");
+    method = frm.attr("method");
+    btn.attr("disabled", "disabled");
+    $.ajax({
+        url: frm.attr('action'),
+        type: method,
+        data: frm.serialize(),
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function(data){
+    		btn.removeAttr("disabled");
+    		frm.find('.response').html(data).hide().slideDown();
+    		},
+    	error:function(data, msg){
+    			btn.removeAttr("disabled");
+    			frm.find('.response').html(data).hide().slideDown();
+    			},
+    });
+    return false;
+
+});
+
+});
+
+</script>
+<style>
+    .main_bg{
+        background: url('<?php echo $this->basePath() ?>/img/layout/contacto.jpg') !important;
+        background-repeat: no-repeat !important;
+        background-size: 100% 100% !important;
+    }
+
+    hr{
+        background: white;
+        width: 100%;
+        height: 3px
+    }
+    h4{
+        font-size: 30px;
+        font-weight: 900;
+        text-align: center;
+    }
+
+</style>
+    <!-- Contacto -->
+<div id="contacto" class="contacto-res text-center" style="">
+      <div  class="text-left contacto-res py-5 margin-0" style="">
+      <div class="row ">
+        <div class="col-md-6 col-sm-12 col-xs-12 ">
+          <h4>Encuentranos</h4><hr>
+          <p><i class="fas fa-map-marker-alt"></i> Calle Ernesto Plasencia 166, San Isidro 15073</p>
+          <p><i class="fas fa-mobile-alt"></i> info@fifvirtual.com</p>
+          <p><i class="fas fa-mobile-alt"></i> +51 994 031 760</p>
+          <p>Organiza</p>
+          <img src="<?php echo $this->basePath('img/layout/');?>logo.png" width="150px;" style="padding: 0 10px 0 10px;">
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <h4>Cont&aacute;ctanos</h4><hr>
+            <?php
+            $this->form->setAttributes(array('id'=>'DatosEnviar3','action'=> $this->url('enviar_comentario'),'method' => 'post'));
+            $this->form->prepare();
+
+            echo $this->form()->openTag($this->form);
+            ?>
+            <div class="response"></div>
+                <div class="form-group">
+                <?php echo $this->formRow($this->form->get('EMAIL'),null,null,'partial/formRow.phtml'); ?>
+                    </div>
+                <div class="form-group">     
+                    <?php echo $this->formRow($this->form->get('NOMBRE'),null,null,'partial/formRow.phtml'); ?>
+                </div>
+                <div class="form-group">
+                <?php echo $this->formRow($this->form->get('TELEFONO'),null,null,'partial/formRow.phtml');?>
+                </div>
+                <div class="form-group">
+                    
+                <?php echo $this->formRow($this->form->get('MENSAJE'),null,null,'partial/formRow.phtml');?>
+                </div>
+
+                    <?php echo $this->formRow($this->form->get('captcha'),null,null,'partial/formRow.phtml');
+                    ?>
+                    <style>
+                    .btn{
+                        width: 100%; background: #ce0552; border-color: #ce0552;
+                    }
+                    #FilaCampos #Label{
+                        display:none;
+                    }
+                    </style>
+                  <div class="response"></div>
+                        <?php
+                        echo $this->formRow($this->form->get('enviar'),null,null,'partial/formRow.phtml');
+                        echo $this->form()->closeTag();
+                        ?> 
+          </div>
+        </div>
+      </div>
+</div>
+    <!-- Contacto -->

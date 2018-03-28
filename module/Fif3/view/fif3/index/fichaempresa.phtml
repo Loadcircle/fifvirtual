@@ -1,0 +1,518 @@
+<script>
+  $(document).ready(function() {
+
+  $('.EnviarCita').submit(function() {
+    frm = $(this);
+      btn = frm.find(".enviar");
+      method = frm.attr("method");
+      btn.attr("disabled", "disabled");
+      $.ajax({
+          url: frm.attr('action'),
+          type: method,
+          data: frm.serialize(),
+          data: new FormData(this),
+          contentType: false,
+          cache: false,
+          processData: false,
+          success: function(data){
+          frm.find('.response').html(data).hide().slideDown();
+          console.log('llegaste aca');
+          },
+        error:function(data, msg){
+        console.log('dio error',data,msg);
+            btn.removeAttr("disabled");
+            frm.find('.response2').html(data).hide().slideDown();
+            },
+      });
+      return false;
+
+  });
+
+  });
+</script>
+
+<div class="stands" style="">
+  <style>
+          .stands a{
+            color: white;
+            font-weight: bold;
+          }
+          .Boton{
+            transition: all ease 0.3s;
+          }
+          .Boton:hover{
+          }
+          #container-main{
+          margin:40px auto;
+          width:95%;
+          min-width:320px;
+          max-width:960px;
+      }
+
+      #container-main h1{
+          font-size: 40px;
+          text-shadow:4px 4px 5px #16a085;
+      }
+
+      .accordion-container {
+          width: 100%;
+          margin: 0 0 20px;
+          clear:both;
+      }
+
+      .accordion-titulo {
+          position: relative;
+          display: block;
+          padding: 20px;
+          font-size: 24px;
+          font-weight: 300;
+          background: #091033;
+          color: #fff;
+          text-decoration: none;
+      }
+      .accordion-titulo.open {
+          background: #091033;
+          color: #fff;
+      }
+      .accordion-titulo:hover {
+          background: #091033;
+      }
+
+      .accordion-titulo span.toggle-icon:before {
+          content:"+";
+      }
+
+      .accordion-titulo.open span.toggle-icon:before {
+          content:"-";
+      }
+
+      .accordion-titulo span.toggle-icon {
+          position: absolute;
+          top: 10px;
+          right: 20px;
+          font-size: 38px;
+          font-weight:bold;
+      }
+
+      .accordion-content {
+          display: none;
+          padding: 20px;
+          overflow: auto;
+      }
+
+      .accordion-content p{
+          margin:0;
+      }
+
+      .accordion-content img {
+          display: block;
+          float: left;
+          margin: 0 15px 10px 0;
+          width: 50%;
+          height: auto;
+      }
+      hr{
+        background: white;
+        width: 100%;
+        height: 3px
+      }
+      .main-stand{
+        height: 600px;
+        background-image:url('<?php echo $this->basePath('img/area/web.png');?>');
+        background-position:center; 
+        background-size: 100% 100%
+      }
+      .mobile{
+        display: none;
+      }
+      /* media query */
+      @media (max-width: 1199px) {
+        .video{
+          margin-left: 410px !important;
+        }
+        .video iframe{
+          width: 235px !important;
+        }
+        .enterate{
+          margin-left: 748px !important;
+        }
+        .publicidad{
+          margin-left: 42px !important;
+        }
+        .publicidad img{
+          width: 134px !important;
+        }
+        .slider{
+          margin-left: 206px !important;
+        }
+        .slider .owl-4{
+          width: 128px !important;
+        }
+        .owl-item img{
+          width: 128px !important;
+        }
+        .agenda{
+          margin-left: 550px !important;
+        }
+        .agenda a h1{
+          font-size: 1.8vw !important;
+        }
+        .modelo{
+          margin-left: 630px !important;
+        }
+        .titulo{
+          font-size: 3.5vw !important;
+        }
+
+      }
+      @media (max-width: 991px) {
+        .video{
+          margin-left: 303px !important;
+          margin-top: -5px !important;
+        }
+        .video iframe{
+          width: 175px !important;
+        }
+        .enterate{
+          margin-left: 557px !important;
+        }
+        .enterate a{
+          font-size: 13px !important;
+          margin: 0 !important;
+        }
+        .enterate img{
+          width: 100px !important;
+        }
+        .publicidad{
+          margin-left: 31px !important;
+          margin-top: -14px !important;
+        }
+        .publicidad img{
+          width: 99px !important;
+        }
+        .slider{
+          margin-left: 153px !important;
+          margin-top: -9px !important;
+        }
+        .slider .owl-4{
+          width: 94px !important;
+        }
+        .owl-item img{
+          width: 94px !important;
+        }
+        .agenda{
+          margin-left: 365px !important;
+        }
+        .agenda a h1{
+          font-size: 1.8vw !important;
+        }
+        .modelo{
+          margin-left: 460px !important;
+          margin-top: 105px !important;
+        }
+        .titulo{
+          font-size: 3.5vw !important;
+        }
+        .rubro{
+          font-size: 1.4vw !important;
+          width: 100px !important; 
+        }
+        .volver{
+          width: 115px !important;
+        }
+        .volver p{
+          font-size: 15px !important;
+        }
+
+
+      }
+      @media (max-width: 767px) {
+        .video{
+          margin-left: 224px !important;
+          margin-top: 9px !important;
+        }
+        .video iframe{
+          width: 129px !important;
+        }
+        .enterate{
+          margin-left: 412px !important;
+        }
+        .enterate a{
+          font-size: 9px !important;
+          margin: 0 !important;
+        }
+        .enterate img{
+          width: 80px !important;
+        }
+        .publicidad{
+          margin-left: 23px !important;
+          margin-top: -1px !important;
+        }
+        .publicidad img{
+          width: 73px !important;
+        }
+        .slider{
+          margin-left: 113px !important;
+          margin-top: 4px !important;
+        }
+        .slider .owl-4{
+          width: 69px !important;
+        }
+        .owl-item img{
+          width: 69px !important;
+        }
+        .agenda{
+          margin-left: 229px !important;
+        }
+        .agenda a h1{
+          font-size: 1.8vw !important;
+        }
+        .modelo{
+          margin-left: 350px !important;
+          margin-top: 150px !important;
+        }
+        .modelo img{
+          width: 80px!important;
+        }
+        .titulo{
+          font-size: 3.5vw !important;
+        }
+        .rubro{
+          font-size: 1.4vw !important;
+          width: 75px !important; 
+        }
+      }
+      @media (max-width: 575px) {
+        .main-stand{
+          width: 345px;
+          height: 400px;
+          background-image:url('<?php echo $this->basePath('img/area/mobile-web.png');?>');
+          background-position:center; 
+          background-size: 100% 100%
+        }  
+        .main-stand-back{
+          width: 345px !important;
+        }
+        .video{
+          margin-left: 12px !important;
+          margin-top: 35px !important;
+        }
+        .video iframe{
+          width: 189px !important;
+          height: 108px!important;
+        }
+        .enterate{
+          margin-left: 240px !important;
+          margin-top: 15px !important;
+        }
+        .enterate a{
+          font-size: 9px !important;
+          margin: 0 !important;
+        }
+        .enterate img{
+          width: 80px !important;
+        }
+        .publicidad{
+          margin-left: 23px !important;
+          margin-top: -1px !important;
+        }
+        .publicidad img{
+          width: 73px !important;
+        }
+        .slider{
+          margin-left: 113px !important;
+          margin-top: 4px !important;
+        }
+        .slider .owl-4{
+          width: 69px !important;
+        }
+        .owl-item img{
+          width: 69px !important;
+        }
+        .agenda{
+          margin-left: 0 !important;
+          margin-top: 230px !important;
+        }
+        .agenda a h1{
+          font-size: 5vw !important;
+        }
+        .modelo{
+          margin-left: 180px !important;
+          margin-top: 113px !important;
+        }
+        .modelo img{
+          width: 65px!important;
+        }
+        .titulo{
+          font-size: 3.5vw !important;
+        }     
+        .arrow-2{         
+          margin-left: 72% !important;
+        } 
+        .arrow-2 img, .arrow img{
+          width: 20px;
+          height: 40px;
+        }
+        .fif img{
+          width: 90px;
+        }
+        .mobile{
+          display: block;
+        }
+      .slider{
+          display: none !important;
+        }
+        .publicidad{
+          display: none !important;
+        } 
+        .rubro{
+          font-size: 2vw !important;
+          width: 80px !important; 
+        } 
+        .publi-modal{
+            width: 250px !important;
+            margin: auto !important;
+            padding-top: 30px !important;
+        }
+        .volver{
+          width: 200px !important;
+          margin-top: 65px!important;
+          margin-left: 0!important;
+        }
+        .volver p{
+          font-size: 15px !important;
+        }
+      }
+  </style>
+    <div class="main-stand-back" style="background: <?php echo $this->Empresa->COLOR;?>; margin: auto; ">
+  <div class="main-stand" style="">
+        <div class="text-center titulo" style="font-size: 40px; color: rgb(63, 63, 63); font-weight: bold;"><?php echo $this->Empresa->NOMBRE;?></div>  
+        <a class="arrow" style="padding:0 10px 0 10px; font-size: 20px;display: inline;margin-left: 2%; width:125px; text-align:center;" class="Boton nav-item nav-link" href="<?php echo $this->url('ficha_empresa',array('ano'=>$this->ANO,'empresa'=>$Empresa->ANTERIOR))?>"><img style="-ms-transform: rotate(180deg);-webkit-transform: rotate(180deg);transform: rotate(180deg);" width="40px" height="50px" src="<?php echo $this->basePath('img/flecha.png');?>" alt=""></a>
+        <a class="arrow-2" style="padding:0 10px 0 10px; font-size: 20px;display: inline;margin-left: 82%;border-radius:30px; width:125px; text-align:center" class="Boton nav-item nav-link" href="<?php echo $this->url('ficha_empresa',array('ano'=>$this->ANO,'empresa'=>$Empresa->SIGUIENTE))?>"><img style="" width="40px" height="50px" src="<?php echo $this->basePath('img/flecha.png');?>" alt=""></a></a>
+        <div class="video" style="position: absolute; margin:34px 0 0 489px;"> <iframe width="280" height="155" src="https://www.youtube.com/embed/<?php echo $this->Empresa->VIDEO;?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> </div>
+        <div class="enterate" style="position:absolute; margin: 21px 0 0 907px;"> <img width="140px" src="<?php echo $this->basePath('img/Logo_Empresas/'.$this->Empresa->IMAGEN_ARCHIVO);?>" alt="">
+        <p class="text-center rubro" style="color: rgb(63, 63, 63); font-weight: bold; width: 150px;"><?php echo $this->Empresa->NOMBRE_RUBRO;?></p><a style="padding: 10px; background: <?php echo $this->Empresa->COLOR;?>; border-radius: 40px; margin: 40px 0 0 12px" href="" data-toggle="modal" data-target="#perfilModal">Ent&eacute;rate m&aacute;s</a> </div>
+        <div class="publicidad" style="position: absolute;margin-top: 24px;margin-left: 50px;"><a href="" data-toggle="modal" data-target="#publiModal">
+          <img width="160px" height="221px" src="<?php echo $this->basePath(); ?>/img/STAND_Empresas/<?php echo $this->Empresa->STAND_ARCHIVO  ;?>" alt=""></a>
+        </div>
+        <div class="modelo" style="position: absolute;margin-left:700px;margin-top: 143px"><img width="100px" src="<?php echo $this->basePath()?>/img/jefa.png" alt=""></div>
+  
+        <div class="slider" style="margin-top: 29px; margin-left: 246px;">
+        <div style="width: 151px; height: 214px" class="owl-4 owl-carousel text-center">
+				<?php foreach($this->Empresa->IMAGENES as $IMAGEN){?>
+					<img style="width: 151px !important; height: 214px !important;" alt="" width="100px" src="<?php echo $this->basePath('img/Imagenes_Empresas/'.$IMAGEN->IMAGEN_NOMBRE);?>">
+        <?php }?>
+        </div>
+        </div>
+        <div class="text-center agenda" style="background: ;width: 320px;margin-top: 94px;margin-left: 685px;">
+        <a  href="" data-toggle="modal" data-target="#citaModal"><h1 style="font-size: 20px;"><h1 style="font-size: 35px;font-weight: bold;">Agendar una cita</h1></h1></a>
+        </div>
+         <div class="volver text-center" style="width: 200px;margin-top: 80px;margin-left: 20px;">
+         <a href="<?php echo $this->url('stands',array('ano'=>$this->ANO,'area'=>1))?>" style="color: white"><p style="color: white; font-size: 20px;font-weight: bold;"><i class="fas fa-arrow-circle-left"></i>Volver a la feria</p></a>
+        </div>
+  </div>   
+
+  <br>
+    <div class="mobile">
+            <div class="row" style="margin: 0!important; padding: 0 0 13px 0!important">
+                <div class="col-xs-6" style="margin-left: 10px">
+                  <div class="slider-mobile">
+                  <div style="width: 155px; height: 200px" class="owl-4 owl-carousel text-center">
+                  <?php foreach($this->Empresa->IMAGENES as $IMAGEN){?>
+                    <img style="width: 151px !important; height: 200px !important;" alt="" width="100px" src="<?php echo $this->basePath('img/Imagenes_Empresas/'.$IMAGEN->IMAGEN_NOMBRE);?>">
+                  <?php }?>
+                  </div>
+                  </div>
+                </div>
+                <div class="col-xs-6" style="margin-left: 10px">
+                  <div class="publicidad-mobile">
+                      <a href="" data-toggle="modal" data-target="#publiModal">
+                    <img width="155px" height="200px" src="<?php echo $this->basePath(); ?>/img/STAND_Empresas/<?php echo $this->Empresa->STAND_ARCHIVO  ;?>" alt=""></a>
+                  </div>
+                </div>
+          </div>
+    </div> 	
+
+</div>
+<!-- Modal Perfil -->
+<div class="modal fade" id="perfilModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div style="padding-top: 0!important; padding-bottom: 0!important;" class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel" style="color:blue;font-weight: 900; display: inline;">Perfil </h1><h1 class="modal-title" id="exampleModalLabel" style="margin-left: 10px;color:black; display: inline;color: #007bff;" > del expositor</h1	>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  <div class="Perfil">
+		<div style="color:black;font-weight: bold;"><?php echo $Empresa->NOMBRE?></div>
+		<div style="color:black;font-weight: bold;"><?php echo $Empresa->DESCRIPCION?></div>
+		<h1 style="color:blue; display: inline; font-weight: 900;">Datos</h1><h1 style="color:black;display: inline;color: #007bff;"> de la Empresa:</h1>
+		<div style="color:black; font-weight: bold;"><i class="fas fa-building"></i> Razon Social: <?php echo $Empresa->RAZON_SOCIAL?></div>
+		<div style="color:black; font-weight: bold;"><i class="fas fa-phone"></i> Tel&eacute;fono Oficina: <?php echo $Empresa->TELEFONO_OFICINA?></div>
+		<div style="color:black; font-weight: bold;"><i class="fas fa-envelope"></i> E-mail: <?php echo $Empresa->EMAIL?></div>
+		<div style="color:black; font-weight: bold;"><i class="fab fa-facebook"></i> Facebook: <a href="<?php echo $this->Empresa->FACEBOOK?>"><?php echo $this->Empresa->FACEBOOK?></a></div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Perfil -->
+
+<!-- Modal cita -->
+<div class="modal fade " id="citaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div style="border-bottom: 0 !important;" class="modal-header">
+        <button style="padding: 0 10px 0 0 !important;color: rgb(38, 48, 154);" type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+      <h1 class="text-center" style="color: #091033; font-weight: 900;margin-top: -10px">Haga su cita</h1>
+    <div id="container-main" style="margin-top: 0 !important;">
+    <?php 
+      $meses = array(00=>"Error",'01'=>"Ene",'02'=>"Feb",'03'=>"Mar",'04'=>"Abr",'05'=>"May",'06'=>"Jun",'07'=>"Jul",'08'=>'Ago','09'=>'Sep','10'=>'Oct','11'=>'Nov','12'=>'Dic'); 
+        foreach($this->Eventos as $Evento){ 
+          ?>
+          <div class="accordion-container">
+            <a href="#" class="accordion-titulo"><?php echo $Evento->DIA. " de ".$meses[$Evento->MES].' de '.$this->ANO; ?><span class="toggle-icon"></span></a>
+            <div class="accordion-content" style="color:black">
+            <form name="Cita" class="EnviarCita" action="<?php echo $this->url('cita',array('ano'=>$this->ANO)) ?>" method="post">
+            <div class="response">
+            <div class="response2"></div>
+            
+            <input type="hidden" name="ID_FECHA" value="<?php echo $Evento->ID; ?>">
+            <input type="hidden" name="ID_EMPRESA" value="<?php echo $this->Empresa->ID; ?>">
+            <?php 
+              foreach($this->Horarios[$Evento->ID] as $Horario){ 
+                if(!ISSET($Horario->ID_USUARIO)){
+                ?>
+                <input type="hidden" value="<?php echo $Horario->ID ?>">
+            <div class="radio">
+            <label style="font-weight: bold; color: #091033"><input  type="radio" value="<?php echo $Horario->ID; ?>" name="ID_HORARIO" required> <?php echo $Horario->NOMBRE; ?></label>
+            </div>
+              <?php  }} ?>
+              <button type="submit" class="enviar btn btn-default">Asignar cita</button>
+              </div>
+              </form>
+              </div>
+              </div>
+    <?php  } ?>
+    
+    
+    
+</div>
+	 </div>
+  </div>
+</div>
+<!-- Modal cita -->
+
+<!-- Modal Publicidad -->
+<div class="modal fade" id="publiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg publi-modal" style="width: 500px" role="document">
+    <div class="modal-content">
+	    <img width="100%" height="" src="<?php echo $this->basePath(); ?>/img/STAND_Empresas/<?php echo $this->Empresa->STAND_ARCHIVO  ;?>" alt="">
+    </div>
+  </div>
+</div>
+<!-- Modal Publicidad -->

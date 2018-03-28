@@ -1,0 +1,35 @@
+<style>
+    .bienvenido{
+        background: url('<?php echo $this->basePath() ?>/img/cliente/trama.jpg');
+        margin-top: 40px;
+    }
+    .bienvenido h1{
+        color: white;
+    }
+    .seccion img{
+        width: 100%;
+        margin-top: 19px;
+        transition: all 0.5s;
+    }
+    .row{
+        margin-bottom: 40px;
+    }
+    .seccion img:hover{
+        -webkit-filter: invert(.8);
+        filter: (.8);
+    }
+</style>
+<div class="container">
+    <div class="bienvenido">
+        <h1 class="text-center py-5 my-6">Bienvenido, <?php echo $usuario->NOMBRE_EMPRESA;?></h1>
+    </div>
+    <div class="row">
+        <div class="col-md-6 seccion">
+            <a href="<?php echo $this->url('inversionistasC')?>"><img src="<?php echo $this->basePath() ?>/img/cliente/inversionistas.jpg" alt=""></a>
+        </div>
+        <div class="col-md-6 seccion">
+            <a href="<?php echo $this->url('citasC')?>"><img src="<?php echo $this->basePath() ?>/img/cliente/agenda.jpg" alt=""></a>
+        </div>
+    </div>
+
+</div>

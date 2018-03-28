@@ -1,0 +1,9 @@
+<div Id="FilaCampos" <?php if($this->element->getAttribute('type')=='hidden'){?>style="padding-top: 0px; height:0px;"<?php }?>>
+   <div Id="Label">
+   	<?php echo $this->label ?><br>
+  </div>
+  <div Id="Campo">
+  	<?php  echo $this->formElement($this->element); if(null !== $this->element->getAttribute('required')){?>&nbsp;&nbsp;<span class="arial11-grey">*</span><?php }?>
+    <?php if(null !== $this->element->getAttribute('data-message')){?><br/><div id="inputfoto"><?php echo $this->element->getAttribute('data-message');?></div><?php }?><br/><div Id="Mesage-<?php echo $this->element->getAttribute('name')?>" class="mensajeRojo"><?php echo $this->formElementErrors($this->element);?></div>
+  </div>
+</div>
